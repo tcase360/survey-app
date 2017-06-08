@@ -173,7 +173,13 @@
    selectAnswer: function(event) {
      var currentTarget = $(event.currentTarget);
      var value = currentTarget.data().index;
+     var text = currentTarget.find('a').text();
      var model = getModelFromCollection(this.model.cid);
+
+     var container = currentTarget.closest('.single-choice-question-container');
+     var button = container.find('button');
+
+     button.html(text + '\n <span class="mui-caret"></span>');
 
      model.set({
        answer: value,

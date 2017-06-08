@@ -23,6 +23,29 @@ var mockData = {
      "question": "Multiple Choice Question",
      "description": "Multiple Choice Description  (optional)",
      "style": "dropdown", // styles are dropdown | list
+     "multiple": true, // the user can select more answers for this question.
+     "required": true,
+     "answers": [ // answers list. The user can choice one (more) of them
+       {
+         "key": 2,
+         "value": "Answer 1"
+       },
+       {
+         "key": 5,
+         "value": "Answer 2"
+       },
+       {
+         "key": 7,
+         "value": "Answer 3"
+       }
+     ],
+   },
+   {
+     "code": 9,
+     "type": "singleChoice",
+     "question": "Single Choice Question",
+     "description": "Single Choice Description  (optional)",
+     "style": "dropdown", // styles are dropdown | list
      "multiple": false, // the user can select more answers for this question.
      "required": true,
      "answers": [ // answers list. The user can choice one (more) of them
