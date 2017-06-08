@@ -4,6 +4,7 @@
   "description": "survey app based on dynamic data",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "test",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
@@ -11,10 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "backbone": "^1.3.3",
+    "bower": "1.8.0",
+    "express": "^4.15.3",
     "jquery": "^3.2.1",
     "mocha": "^3.4.2",
     "muicss": "^0.9.16",
-    "underscore": "^1.8.3",
-    "bower": "1.8.0"
+    "underscore": "^1.8.3"
   }
 }
