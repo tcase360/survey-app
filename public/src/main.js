@@ -197,26 +197,47 @@
    },
 
    events: {
-     'click li': 'chooseOption'
+     'click a': 'chooseOption'
    },
 
    chooseOption: function(event) {
      var model = getModelFromCollection(this.model.cid);
-     var target = $(event.delegateTarget);
-     var value = target.data().index;
+     var target = $(event.target);
+     var link = target.find('a');
 
-     var currentAnswers = model.get('answer');
+     var container = target.closest('.multiple-choice-list');
+     var array = container.find('a').toArray();
 
-     var inArray = currentAnswers.reduce(function(total, value) {
-       if(element.key === value) {
-         total = true;
+     var value = target.attr('data-checked');
+     if(value == 'true') {
+       target.attr('data-checked', false);
+       target.removeClass('active');
+       target.addClass('mui-btn--flat');
+     } else {
+       target.attr('data-checked', true);
+       target.addClass('active');
+       target.removeClass('mui-btn--flat')
+     }
+
+     var newArray = array.filter(function(element, index) {
+      if($(element).attr('data-checked') == 'true') {
+        return true;
+      }
+     }).map(function(element, index, array) {
+       if($(element).attr('data-checked')) {
+         return {
+           key: $(element).attr('data-index'),
+           value: $(element).text().trim()
+         }
        }
-     })
+     });
 
-     console.log(inArray);
+     console.log(newArray);
+
+
 
      model.set({
-
+       answer: newArray
      })
    }
 

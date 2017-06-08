@@ -92,10 +92,10 @@
       <h5><%= question %></h5>
     </div>
 
-    <ul class="multiple-choice-list" data-group="dropdown-group--<% code %>">
+    <ul class="multiple-choice-list" data-group="dropdown-group--<%= code %>">
       <% answers.forEach(function(element, index, array) { %>
         <li class="mui-col-xs-12 mui-col-sm-6 mui-col-md-6 mui-col-lg-4 choice">
-          <a class="mui-btn mui-btn--primary mui-btn--flat" data-index="<%= element.key %>">
+          <a class="mui-btn mui-btn--primary mui-btn--flat" data-index="<%= element.key %>" data-checked="false">
             <%= element.value %>
           </a>
         </li>
