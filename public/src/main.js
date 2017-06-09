@@ -123,14 +123,15 @@
  var TextQuestionView = Backbone.View.extend({
    template: _.template($('#textInputQuestionTemplate').html()),
 
-   className: 'text-question-container mui-container',
+   className: 'question-container text-question-container mui-container',
 
    initialize: function() {
      this.render();
    },
 
    events: {
-      'keydown': 'inputText'
+      'keydown': 'inputText',
+      'click .next-question-button': 'nextButtonCheck'
    },
 
    render: function() {
@@ -146,6 +147,13 @@
      if(value !== '') {
        model.set({ validated: true });
      }
+   },
+
+   nextButtonCheck: function(event) {
+     var model = getModelFromCollection(this.model.cid);
+     var validated = model.get('validated');
+     console.log(this);
+     questionsCollection.nextQuestion(event);
    }
  });
 
@@ -154,7 +162,7 @@
 
    tagName: 'div',
 
-   className: 'single-choice-question-container mui-container',
+   className: 'question-container single-choice-question-container mui-container',
 
    intialize: function() {
 
@@ -193,6 +201,8 @@
 
    tagName:'div',
 
+   className: 'question-container multiple-choice-question-container mui-container',
+
    intialize: function() {
      this.render();
    },
@@ -215,6 +225,7 @@
      var array = container.find('a').toArray();
 
      var value = target.attr('data-checked');
+
      if(value == 'true') {
        target.attr('data-checked', false);
        target.removeClass('active');
@@ -238,10 +249,6 @@
        }
      });
 
-     console.log(newArray);
-
-
-
      model.set({
        answer: newArray
      })
@@ -258,7 +265,7 @@
 
    tagName: 'div',
 
-   className: 'rating-question-container mui-container',
+   className: 'question-container rating-question-container mui-container',
 
    events: {
       'click input': 'validateRating'
@@ -293,6 +300,12 @@
 
  var QuestionsCollection = Backbone.Collection.extend({
    model: QuestionModel,
+
+   nextQuestion: function(event) {
+     console.log('next question');
+     console.log(arguments);
+     console.log(this);
+   }
  });
 
  var questionsCollection = new QuestionsCollection;

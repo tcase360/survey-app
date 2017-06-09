@@ -1,3 +1,14 @@
+body {
+  padding: 25px;
+}
+
+/**
+ * General Styles
+ */
+.question-container {
+  min-height: 200px;
+}
+
 /**
  * Star rating system section
  */
@@ -18,10 +29,11 @@
   padding: 0 10px;
 }
 
-.rate:not(:checked) > input {
-  position: absolute;
-  top: -9999px;
+.rate > input {
+  display: none;
 }
+
+
 
 .rate:not(:checked) > label {
   float: right;
@@ -83,6 +95,14 @@
  */
 
 .multiple-choice-list {
-  list-style:none;
-  
+  list-style: none;
+}
+.button-checkbox {
+  height: 36px;
+  width: 36px;
+  display: inline-block;
+}
+.button-checkbox-text {
+  height: 36px;
+  display: inline-block;
 }
