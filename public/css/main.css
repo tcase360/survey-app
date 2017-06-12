@@ -8,6 +8,7 @@ body {
 .question-container {
   min-height: 300px;
   position: relative;
+  max-width: 544px;
 }
 
 .question-footer {
