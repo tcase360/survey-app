@@ -37,6 +37,8 @@ var TextQuestionModel = Backbone.Model.extend({
     this.maxLength = this.attributes.maxLength;
   },
 
+  
+
   defaults: {
     answer: null,
     validated: false,

@@ -49,15 +49,22 @@ function viewNextQuestion(self) {
 
 function formValidityCheck() {
   var validity = true;
+  var invalidArray = [];
   questionsCollection.each(function(element, index, array) {
-    console.log(element);
-
-    if(!element.attributes.validated) {
+    if(!element.attributes.validated || !element.attributes.required) {
       validity = false;
+      element.
+      invalidArray.push({
+        element
+      })
     }
   });
 
-  return validity;
+  if(!validity) {
+    return invalidArray;
+  } else {
+    return true;
+  }
 }
 
  var QuestionsCollection = Backbone.Collection.extend({
@@ -99,12 +106,12 @@ function formValidityCheck() {
        });
      } break;
 
-     case 'multiChoice': {
-       questionView = new MultiChoiceQuestionView({
-         model:question,
-         id:question.attributes.id,
-       });
-     } break;
+    //  case 'multiChoice': {
+    //    questionView = new MultiChoiceQuestionView({
+    //      model:question,
+    //      id:question.attributes.id,
+    //    });
+    //  } break;
 
      case 'yesNo': {
        questionView = new YesNoQuestionView({
@@ -127,7 +134,7 @@ function formValidityCheck() {
        });
      } break;
 
-     case 'singleChoice': {
+     case 'multiChoice': {
        questionView = new SingleChoiceQuestionView({
          model:question,
          id:question.attributes.id
@@ -148,10 +155,16 @@ function postSurveyData(data, callback) {
 
 $(document).ready(function() {
  $('#form-submit-button').on('click', function(e) {
-   if(formValidityCheck()) {
-     postSurveyData(questionsCollection.toJSON(), function(data) {
+   var validity = formValidityCheck();
 
+   if(validity === true) {
+     postSurveyData(questionsCollection.toJSON(), function(data) {
+       console.log(validity);
      });
+   } else {
+     validity.forEach(function(data) {
+
+     })
    }
  })
 });
