@@ -58,9 +58,9 @@
   </div>
 
   <div class="question-footer">
-    <% if(required) { %><span class="mui--pull-left"><a class="skip-button">Skip</a></span><% } %>
+    <% if(required) { %><span class="mui--pull-left"><a class="skip-button"><%= skipBtnLabel %></a></span><% } %>
     <span class="mui--pull-right">
-      <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button">Next</a>
+      <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button"><%= nextBtnLabel %></a>
     </span>
   </div>
 
@@ -84,6 +84,14 @@
         <% }) %>
       </select>
     </div>
+
+    <div class="question-footer">
+      <% if(required) { %><span class="mui--pull-left"><a class="skip-button"><%= skipBtnLabel %></a></span><% } %>
+      <span class="mui--pull-right">
+        <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button"><%= nextBtnLabel %></a>
+      </span>
+    </div>
+
   </div>
 
 </script>
@@ -105,8 +113,6 @@
     </span>
   </div>
 
-
-
 </script>
 
 <script type="text/template" id="multiChoiceQuestionTemplate">
@@ -127,6 +133,13 @@
       <% }); %>
     </ul>
 
+    <div class="question-footer">
+      <% if(required) { %><span class="mui--pull-left"><a class="skip-button"><%= skipBtnLabel %></a></span><% } %>
+      <span class="mui--pull-right">
+        <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button"><%= nextBtnLabel %></a>
+      </span>
+    </div>
+
   </div>
 
 </script>
@@ -134,6 +147,8 @@
 <script src="components/underscore/underscore.js"></script>
 <script src="components/jquery/dist/jquery.js"></script>
 <script src="components/backbone/backbone.js"></script>
+<script src="src/views.js"></script>
+<script src="src/models.js"></script>
 <script src="src/linked-list.js"></script>
 <script src="src/main.js"></script>
 
