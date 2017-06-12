@@ -150,10 +150,10 @@
    },
 
    nextButtonCheck: function(event) {
-     var model = getModelFromCollection(this.model.cid);
-     var validated = model.get('validated');
-     console.log(this);
-     questionsCollection.nextQuestion(event);
+     var nextQuestionTriggered = viewNextQuestion(this);
+     if (!nextQuestionTriggered) {
+       // error handling
+     }
    }
  });
 
@@ -257,7 +257,7 @@
  });
 
  var YesNoQuestionView = Backbone.View.extend({
-
+   className: 'question-container'
  });
 
  var RatingQuestionView = Backbone.View.extend({
@@ -268,7 +268,8 @@
    className: 'question-container rating-question-container mui-container',
 
    events: {
-      'click input': 'validateRating'
+      'click input': 'validateRating',
+      'click '
    },
 
    intialize: function() {
@@ -286,25 +287,41 @@
      model.set({
        answer: value,
        validated: true,
-      })
+     });
    }
  });
 
  var FormQuestionView = Backbone.View.extend({
-
+   className: 'question-container'
  });
 
  function getModelFromCollection(id) {
    return questionsCollection.get(id);
  }
 
+ function viewNextQuestion(self) {
+   var model = getModelFromCollection(self.model.cid);
+   var validated = model.get('validated');
+   if(validated) {
+     questionsCollection.nextQuestion(model);
+     return true;
+   } else {
+     return false;
+   }
+ }
+
  var QuestionsCollection = Backbone.Collection.extend({
    model: QuestionModel,
 
-   nextQuestion: function(event) {
-     console.log('next question');
-     console.log(arguments);
-     console.log(this);
+   // Scrolls to next question in survey
+   nextQuestion: function(model) {
+     var nextQuestion = $('#' + model.attributes.id).next();
+
+     if(!!nextQuestion.length) {
+       $('html, body').animate({
+         scrollTop: (nextQuestion.offset().top)
+       }, 250);
+     }
    }
  });
 
@@ -317,6 +334,7 @@
 
  questionsCollection.each(function(question) {
    var questionView;
+   console.log(question);
 
    switch (question.attributes.type) {
      case 'text': {

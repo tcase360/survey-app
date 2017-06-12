@@ -6,14 +6,22 @@ body {
  * General Styles
  */
 .question-container {
-  min-height: 200px;
+  min-height: 300px;
+  position: relative;
+}
+
+.question-footer {
+  position: absolute;
+  bottom: 0;
+  width: 93%;
 }
 
 /**
  * Star rating system section
  */
 .rating-container {
-  margin:auto;
+  position: relative;
+  margin: auto;
   height:200px;
 }
 
@@ -32,8 +40,6 @@ body {
 .rate > input {
   display: none;
 }
-
-
 
 .rate:not(:checked) > label {
   float: right;
@@ -84,6 +90,14 @@ body {
 .text-question-container {
   max-width: 544px;
   margin:auto;
+}
+.question-container > .mui-textfield {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  height: 30%;
+  width: 98%;
+  margin: -15% 0 0 -25%;
 }
 
 .mui-textfield {

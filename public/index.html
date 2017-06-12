@@ -7,8 +7,7 @@
     <title>Survey</title>
 
     <link type="text/css" rel="stylesheet" href="components/mui/packages/cdn/css/mui.css"/>
-    <link type="text/css" rel="stylesheet" href="components/fontawesome/css/font-awesome.css"/>
-    <link type="text/css" rel="stylesheet" href="components/intl-tel-input/build/css/intlTelInput.css"/>
+    <!-- <link type="text/css" rel="stylesheet" href="components/fontawesome/css/font-awesome.css"/> -->
 
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <script src="components/mui/packages/cdn/js/mui.min.js"></script>
@@ -58,6 +57,13 @@
     <% } %>
   </div>
 
+  <div class="question-footer">
+    <% if(required) { %><span class="mui--pull-left"><a class="skip-button">Skip</a></span><% } %>
+    <span class="mui--pull-right">
+      <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button">Next</a>
+    </span>
+  </div>
+
 </script>
 
 <!-- Dropdown -->
@@ -92,11 +98,14 @@
 
   </div>
 
-  <span class="mui--pull-left"><% if(required) { %> <a class="skip-button">Skip</a> <% } %></span>
-  <span class="mui--pull-right">
-    <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button">Next</a>
-  </span>
-  <div class="mui--clearfix"></div>
+  <div class="question-footer">
+    <% if(required) { %><span class="mui--pull-left"><a class="skip-button">Skip</a></span><% } %>
+    <span class="mui--pull-right">
+      <a class="mui-btn mui-btn--raised mui-btn--primary next-question-button">Next</a>
+    </span>
+  </div>
+
+
 
 </script>
 
