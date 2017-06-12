@@ -99,7 +99,8 @@ var MultiChoiceQuestionView = Backbone.View.extend({
   },
 
   events: {
-    'click a': 'chooseOption'
+    'click a': 'chooseOption',
+    'click .next-question-button': 'nextButton'
   },
 
   chooseOption: function(event) {
@@ -138,6 +139,13 @@ var MultiChoiceQuestionView = Backbone.View.extend({
     model.set({
       answer: newArray
     })
+  },
+
+  nextButton: function(event) {
+    var nextQuestionTriggered = viewNextQuestion(this);
+    if (!nextQuestionTriggered) {
+      // error handling
+    }
   }
 
 });
