@@ -53,7 +53,6 @@ function formValidityCheck() {
   questionsCollection.each(function(element, index, array) {
     if(!element.attributes.validated || !element.attributes.required) {
       validity = false;
-      element.
       invalidArray.push({
         element
       })
@@ -135,10 +134,18 @@ function formValidityCheck() {
      } break;
 
      case 'multiChoice': {
-       questionView = new SingleChoiceQuestionView({
-         model:question,
-         id:question.attributes.id
-       });
+       if(question.attributes.style === 'list') {
+         questionView = new MultiChoiceQuestionView({
+            model:question,
+            id:question.attributes.id,
+          });
+       }
+       if (question.attributes.style === 'dropdown') {
+         questionView = new SingleChoiceQuestionView({
+           model:question,
+           id:question.attributes.id
+         });
+       }
      } break;
 
      default: {
