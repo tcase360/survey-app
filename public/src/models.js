@@ -8,23 +8,23 @@ var QuestionModel = Backbone.Model.extend({
     switch (this.type) {
       case('text'): {
         this.questionObject = new TextQuestionModel(this);
-      }
+      } break;
 
       case('multiChoice'): {
         this.questionObject = new MultiChoiceQuestionModel(this);
-      }
+      } break;
 
       case('yesNo'): {
         this.questionObject = new YesNoQuestionModel(this);
-      }
+      } break;
 
       case('rating'): {
         this.questionObject = new RatingQuestionModel(this);
-      }
+      } break;
 
       case('form'): {
         this.questionObject = new FormQuestionModel(this);
-      }
+      } break;
 
       default: null;
     }

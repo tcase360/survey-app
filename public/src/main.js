@@ -31,20 +31,34 @@
    model: QuestionModel,
  });
 
- function getModelFromCollection(id) {
-   return questionsCollection.get(id);
- }
+function getModelFromCollection(id) {
+  return questionsCollection.get(id);
+}
 
- function viewNextQuestion(self) {
-   var model = getModelFromCollection(self.model.cid);
-   var validated = model.get('validated');
-   if(validated) {
-     questionsCollection.nextQuestion(model);
-     return true;
-   } else {
-     return false;
-   }
+
+function viewNextQuestion(self) {
+ var model = getModelFromCollection(self.model.cid);
+ var validated = model.get('validated');
+ if(validated) {
+   questionsCollection.nextQuestion(model);
+   return true;
+ } else {
+   return false;
  }
+}
+
+function formValidityCheck() {
+  var validity = true;
+  questionsCollection.each(function(element, index, array) {
+    console.log(element);
+
+    if(!element.attributes.validated) {
+      validity = false;
+    }
+  });
+
+  return validity;
+}
 
  var QuestionsCollection = Backbone.Collection.extend({
    model: QuestionModel,
@@ -56,6 +70,10 @@
      if(!!nextQuestion.length) {
        $('html, body').animate({
          scrollTop: (nextQuestion.offset().top)
+       }, 250);
+     } else {
+       $('html, body').animate({
+         scrollTop: ($('.submit-section').offset().top)
        }, 250);
      }
    }
@@ -123,3 +141,17 @@
 
    $("#container").append(questionView.render().$el);
  });
+
+function postSurveyData(data, callback) {
+
+}
+
+$(document).ready(function() {
+ $('#form-submit-button').on('click', function(e) {
+   if(formValidityCheck()) {
+     postSurveyData(questionsCollection.toJSON(), function(data) {
+
+     });
+   }
+ })
+});

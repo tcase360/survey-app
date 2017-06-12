@@ -101,9 +101,6 @@ body {
   margin: -15% 0 0 -25%;
 }
 
-.mui-textfield {
-
-}
 
 /**
  * Multiple Choice Section
@@ -120,4 +117,27 @@ body {
 .button-checkbox-text {
   height: 36px;
   display: inline-block;
+}
+
+/**
+ * Submit Section
+ */
+.submit-section {
+  min-height: 300px;
+  position: relative;
+}
+
+.submit-section > .submit-section--body {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  height: 30%;
+  width: 98%;
+  margin: -15% 0 0 -25%;
+}
+
+.submit-section > .submit-section--footer {
+  position: absolute;
+  bottom: 0;
+  width: 93%;
 }
