@@ -68,15 +68,17 @@ var mockData = {
           "noLabel": "No",
           "required": true,
           "cssLabel": "label-info"
-        }, {
-          "code": 5,
-          "type": "rating",
-          "question": "rating question faces",
-          "required": true,
-          "style": "faces",
-          "cssLabel": "label-warning",
-          "styleLock": false
-        }, {
+        },
+        // {
+        //   "code": 5,
+        //   "type": "rating",
+        //   "question": "rating question faces",
+        //   "required": true,
+        //   "style": "faces",
+        //   "cssLabel": "label-warning",
+        //   "styleLock": false
+        // },
+        {
           "code": 6,
           "type": "rating",
           "question": "rating question stars",
@@ -84,47 +86,49 @@ var mockData = {
           "style": "stars",
           "cssLabel": "label-warning",
           "styleLock": false
-        }, {
-          "code": 7,
-          "type": "rating",
-          "question": "rating question numebrs",
-          "required": true,
-          "style": "numbers",
-          "cssLabel": "label-warning",
-          "styleLock": false
-        }, {
-          "code": 8,
-          "type": "form",
-          "question": "hello world this is a form",
-          "required": true,
-          "override": false,
-          "fields": [
-            {
-              "key": "first_name",
-              "value": "first name"
-            }, {
-              "key": "email",
-              "value": "email"
-            }, {
-              "key": "last_name",
-              "value": "last name"
-            }, {
-              "key": "document_type",
-              "value": "document type"
-            }, {
-              "key": "document_number",
-              "value": "document number"
-            }, {
-              "key": "gender",
-              "value": "gender"
-            }, {
-              "key": "birth_date",
-              "value": "birth date"
-            }
-          ],
-          "cssLabel": "label-danger",
-          "filterFields": []
-        }
+        },
+        // {
+        //   "code": 7,
+        //   "type": "rating",
+        //   "question": "rating question numebrs",
+        //   "required": true,
+        //   "style": "numbers",
+        //   "cssLabel": "label-warning",
+        //   "styleLock": false
+        // },
+        // {
+        //   "code": 8,
+        //   "type": "form",
+        //   "question": "hello world this is a form",
+        //   "required": true,
+        //   "override": false,
+        //   "fields": [
+        //     {
+        //       "key": "first_name",
+        //       "value": "first name"
+        //     }, {
+        //       "key": "email",
+        //       "value": "email"
+        //     }, {
+        //       "key": "last_name",
+        //       "value": "last name"
+        //     }, {
+        //       "key": "document_type",
+        //       "value": "document type"
+        //     }, {
+        //       "key": "document_number",
+        //       "value": "document number"
+        //     }, {
+        //       "key": "gender",
+        //       "value": "gender"
+        //     }, {
+        //       "key": "birth_date",
+        //       "value": "birth date"
+        //     }
+        //   ],
+        //   "cssLabel": "label-danger",
+        //   "filterFields": []
+        // }
       ],
       "questionCount": 8
     },

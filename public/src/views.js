@@ -57,28 +57,22 @@ var SingleChoiceQuestionView = Backbone.View.extend({
   },
 
   events: {
-    'click li': 'selectAnswer',
     'click .next-question-button': 'nextButtonCheck'
   },
 
-  selectAnswer: function(event) {
-    var currentTarget = $(event.currentTarget);
-    var value = currentTarget.data().index;
-    var text = currentTarget.find('a').text();
+  nextButtonCheck: function(event) {
+    var container = $(event.target).closest('.question-container');
+
+    var select = container.find('select');
+    var value = select.val();
+
     var model = getModelFromCollection(this.model.cid);
-
-    var container = currentTarget.closest('.single-choice-question-container');
-    var button = container.find('button');
-
-    button.html(text + '\n <span class="mui-caret"></span>');
 
     model.set({
       answer: value,
-      validated: true
+      validated: !!value ? true : false
     });
-  },
 
-  nextButtonCheck: function(event) {
     var nextQuestionTriggered = viewNextQuestion(this);
     if (!nextQuestionTriggered) {
       // error handling
@@ -103,7 +97,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
   },
 
   events: {
-    'click a': 'chooseOption',
+    'click a.multi-choice-answer-button': 'chooseOption',
     'click .next-question-button': 'nextButton'
   },
 
@@ -114,6 +108,16 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 
     var container = target.closest('.multiple-choice-list');
     var array = container.find('a').toArray();
+    var listArray = container.find('li').toArray();
+
+    listArray.map(function(element, index) {
+      var child = $(element).find('a');
+      if(child.attr('data-checked') == 'true') {
+        child.attr('data-checked', false);
+        child.removeClass('active');
+        child.addClass('mui-btn--flat');
+      }
+    })
 
     var value = target.attr('data-checked');
 
@@ -140,8 +144,13 @@ var MultiChoiceQuestionView = Backbone.View.extend({
       }
     });
 
+    var validated = false;
+
+    if(newArray.length > 0) validated = true;
+
     model.set({
-      answer: newArray
+      answer: newArray,
+      validated: validated
     })
   },
 
