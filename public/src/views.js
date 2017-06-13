@@ -18,13 +18,20 @@ var TextQuestionView = Backbone.View.extend({
   },
 
   inputText: function(event) {
-
-    var value = $(event.target).val();
+    var target = $(event.target);
+    var value = target.val();
+    var container = target.closest('.question-container');
+    var nextButton = container.find('.next-question-button');
     var model = getModelFromCollection(this.model.cid);
+
     model.set({ 'answer': value });
 
-    if(value !== '') {
+    if(value.trim() !== '') {
       model.set({ validated: true });
+      nextButton.fadeIn('slow');
+    } else {
+      model.set({ validated: false });
+      nextButton.fadeOut('slow');
     }
 
     if(event.keyCode === 13 || event.keyCode === 9) {

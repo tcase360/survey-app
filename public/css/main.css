@@ -125,7 +125,10 @@ body {
  */
 .text-question-container {
   max-width: 544px;
-  margin:auto;
+  margin: auto;
+}
+.text-question-container > .question-footer {
+  min-height: 50px;
 }
 
 
