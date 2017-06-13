@@ -18,6 +18,32 @@ body {
 }
 
 /**
+ * Welcome message section
+ */
+
+.welcome-message {
+
+}
+
+.welcome-message--body, .welcome-message--footer {
+  text-align: center;
+}
+
+.mui-btn {
+
+}
+
+.mui-btn.mui-btn--success {
+
+}
+
+.mui-btn--success {
+
+}
+
+
+
+/**
  * Star rating system section
  */
 .rating-container {

@@ -160,18 +160,29 @@ function postSurveyData(data, callback) {
 
 }
 
+function submitForm(e) {
+  var validity = formValidityCheck();
+
+  if(validity === true) {
+    postSurveyData(questionsCollection.toJSON(), function(data) {
+      console.log(validity);
+    });
+  } else {
+    validity.forEach(function(data) {
+
+    })
+  }
+}
+
+function initializeSurvey(event) {
+  $('#welcome-section').fadeOut('fast', function() {
+      $('#container').fadeIn('fast', function() {
+        $('#submit-section').fadeIn('fast');
+      });
+  });
+}
+
 $(document).ready(function() {
- $('#form-submit-button').on('click', function(e) {
-   var validity = formValidityCheck();
-
-   if(validity === true) {
-     postSurveyData(questionsCollection.toJSON(), function(data) {
-       console.log(validity);
-     });
-   } else {
-     validity.forEach(function(data) {
-
-     })
-   }
- })
+ $('#form-submit-button').on('click', submitForm);
+ $('#initialize-survey').on('click', initializeSurvey);
 });
