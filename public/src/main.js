@@ -83,6 +83,8 @@ function formValidityCheck() {
          scrollTop: ($('.submit-section').offset().top)
        }, 250);
      }
+
+     updateProgress();
    }
  });
 
@@ -149,6 +151,18 @@ function formValidityCheck() {
 
    $("#container").append(questionView.render().$el);
  });
+
+function updateProgress() {
+  var length = questionsCollection.length;
+  var invalidQuestions = formValidityCheck();
+  var progressBar = $('.progress > .determinate');
+  var percentage;
+
+  if(!!invalidQuestions.length) {
+    percentage = ((length - invalidQuestions.length) / length) * 100;
+    progressBar.css('width', percentage + '%');
+  }
+}
 
 function postSurveyData(data, callback) {
 
