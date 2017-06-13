@@ -203,6 +203,10 @@ var RatingQuestionView = Backbone.View.extend({
       answer: value,
       validated: true,
     });
+
+    setTimeout(function() {
+      viewNextQuestion(self);
+    }, 200);
   },
 
   nextButton: function(event) {
