@@ -158,6 +158,7 @@ function updateProgress() {
   var length = questionsCollection.length;
   var invalidQuestions = formValidityCheck();
   var progressBar = $('.progress > .determinate');
+  var progressCounter = $('.progress-counter');
   var percentage;
 
   if(!!invalidQuestions.length) {
@@ -166,6 +167,11 @@ function updateProgress() {
   } else {
     progressBar.css('width', '100%');
   }
+  var progressCount = length - invalidQuestions.length;
+  if(!progressCount) {
+    progressCount = length;
+  }
+  progressCounter.text(progressCount + '/' + length);
 }
 
 function postSurveyData(data, callback) {
@@ -190,9 +196,13 @@ function submitForm(e) {
 }
 
 function initializeSurvey(event) {
+  var length = questionsCollection.length;
+  var progressCounter = $('.progress-counter');
+
   $('#welcome-section').fadeOut('fast', function() {
       $('#container').fadeIn('fast', function() {
-        $('.progress').fadeIn('slow');
+        progressCounter.text('0/' + length);
+        $('footer').fadeIn('slow');
         $('#submit-section').fadeIn('fast');
         $('body').unbind('keydown');
         $('.question-container').first().addClass('active');

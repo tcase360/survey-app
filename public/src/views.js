@@ -74,6 +74,9 @@ var SingleChoiceQuestionView = Backbone.View.extend({
     var target = $(event.currentTarget);
     var menuList = target.find('.mui-select__menu');
     var children = menuList.children();
+    $(children[0]).remove();
+    var height = menuList.height();
+    menuList.css('height', height - 50 + 'px');
 
     children.one('click', function(event) {
       var target = $(event.target);
