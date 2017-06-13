@@ -176,6 +176,7 @@ function initializeSurvey(event) {
       $('#container').fadeIn('fast', function() {
         $('#submit-section').fadeIn('fast');
         $('body').unbind('keydown');
+        $('.question-container').first().addClass('active');
       });
   });
 }
@@ -186,10 +187,35 @@ function detectEnterKey(event) {
   }
 }
 
-detectActiveDiv(event) {
+function detectActiveDiv(event) {
+  var elementsArray = $('.question-container').toArray();
+  var screen_height = $(window).height();
+  var activation_offset = 0.5; //determines how far up the the page the element needs to be before triggering the function
+  var max_scroll_height = $('body').height() - screen_height - 5; //-5 for a little bit of buffer
+  var y_scroll_pos = window.pageYOffset;
 
-  // currentQuestion.removeClass('active');
-  // nextQuestion.addClass('active');
+  //Does something when user scrolls to it OR
+  //Does it when user has reached the bottom of the page and hasn't triggered the function yet
+
+  elementsArray.map(function(element, index, array) {
+    var element_position = $(element).offset().top;
+    var activation_point = element_position - (screen_height * activation_offset);
+    var element_in_view = y_scroll_pos > activation_point;
+    var has_reached_bottom_of_page = max_scroll_height <= y_scroll_pos && !element_in_view;
+    var element_reached_top_of_screen = element_position < y_scroll_pos;
+
+    if(element_in_view || has_reached_bottom_of_page) {
+      if(!$(element).hasClass('active')) {
+        $(element).addClass('active');
+      }
+    } else {
+      $(element).removeClass('active');
+    }
+
+    if(element_reached_top_of_screen) {
+      $(element).removeClass('active');
+    }
+  });
 }
 
 $(document).ready(function() {
