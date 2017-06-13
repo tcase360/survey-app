@@ -65,7 +65,6 @@ var SingleChoiceQuestionView = Backbone.View.extend({
 
     var select = container.find('select');
     var value = select.val();
-
     var model = getModelFromCollection(this.model.cid);
 
     model.set({
@@ -164,7 +163,9 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 });
 
 var YesNoQuestionView = Backbone.View.extend({
-  className: 'question-container'
+  className: 'question-container yes-no-question-container mui-container',
+
+  
 });
 
 var RatingQuestionView = Backbone.View.extend({

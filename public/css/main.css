@@ -9,6 +9,14 @@ body {
   min-height: 300px;
   position: relative;
   max-width: 544px;
+  opacity: 0.3;
+  -webkit-transition: opacity 250ms;
+     -moz-transition: opacity 250ms;
+          transition: opacity 250ms;
+}
+
+.question-container.active {
+  opacity: 1;
 }
 
 .question-footer {
@@ -151,6 +159,7 @@ body {
 .submit-section {
   min-height: 300px;
   position: relative;
+  text-align: center;
 }
 
 .submit-section > .submit-section--body {
@@ -166,4 +175,5 @@ body {
   position: absolute;
   bottom: 0;
   width: 93%;
+  text-align: center;
 }

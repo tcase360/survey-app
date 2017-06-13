@@ -71,7 +71,8 @@ function formValidityCheck() {
 
    // Scrolls to next question in survey
    nextQuestion: function(model) {
-     var nextQuestion = $('#' + model.attributes.id).next();
+     var currentQuestion = $('#' + model.attributes.id);
+     var nextQuestion = currentQuestion.next();
 
      if(!!nextQuestion.length) {
        $('html, body').animate({
@@ -161,6 +162,9 @@ function submitForm(e) {
       console.log(validity);
     });
   } else {
+    $('html, body').animate({
+      scrollTop: ($('#' + validity[0].element.attributes.id).offset().top)
+    }, 250);
     validity.forEach(function(data) {
 
     })
@@ -182,8 +186,15 @@ function detectEnterKey(event) {
   }
 }
 
+detectActiveDiv(event) {
+
+  // currentQuestion.removeClass('active');
+  // nextQuestion.addClass('active');
+}
+
 $(document).ready(function() {
  $('#form-submit-button').on('click', submitForm);
  $('#initialize-survey').on('click', initializeSurvey);
  $('body').on('keydown', detectEnterKey);
+ $(window).on('scroll', detectActiveDiv);
 });
