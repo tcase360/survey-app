@@ -25,6 +25,10 @@ var TextQuestionView = Backbone.View.extend({
     if(value !== '') {
       model.set({ validated: true });
     }
+
+    if(event.keyCode === 13) {
+      this.nextButtonCheck(event);
+    }
   },
 
   nextButtonCheck: function(event) {

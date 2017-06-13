@@ -19,7 +19,7 @@
 
  /**
   * This will be a linked list
-  * @type {Object}
+  * @type { Object }
   *
   * To initialize the linked list, it will push a
   * new Element() constructor into the  mainArray,
@@ -105,13 +105,6 @@ function formValidityCheck() {
        });
      } break;
 
-    //  case 'multiChoice': {
-    //    questionView = new MultiChoiceQuestionView({
-    //      model:question,
-    //      id:question.attributes.id,
-    //    });
-    //  } break;
-
      case 'yesNo': {
        questionView = new YesNoQuestionView({
          model:question,
@@ -178,11 +171,19 @@ function initializeSurvey(event) {
   $('#welcome-section').fadeOut('fast', function() {
       $('#container').fadeIn('fast', function() {
         $('#submit-section').fadeIn('fast');
+        $('body').unbind('keydown');
       });
   });
+}
+
+function detectEnterKey(event) {
+  if(event.keyCode === 13) {
+    initializeSurvey(event);
+  }
 }
 
 $(document).ready(function() {
  $('#form-submit-button').on('click', submitForm);
  $('#initialize-survey').on('click', initializeSurvey);
+ $('body').on('keydown', detectEnterKey);
 });
