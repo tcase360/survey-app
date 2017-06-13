@@ -4,6 +4,8 @@ var mockData = {
     "lastAnswerDate": "2017-06-12T13:02:43Z",
     "bgImage": "",
     "data": {
+      "alreadyAnsweredLabel": "You have already taken this survey, please go click the button to go to the next step",
+      "startBtnLabel": "Let's get started",
       "welcomeText": "Welcome to the survey",
       "thanksText": "Thanks for taking this survey",
       "skippable": true,
@@ -151,6 +153,10 @@ var mockData = {
 
 // multi choice has two styles - list or dropdown
 // rating - "faces", "numbers" and "stars"
+//
+// after submit, show thank you text
+// if trigger next step is empty, then show survey
+// if trigger next step is not empty and the lastAnswerDate is present, automatically send to next step
 
 var svg = {
   checkMark: '<svg style="width:24px;height:24px" viewBox="0 0 24 24">' + '<path fill="#000000" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />' + '</svg>'

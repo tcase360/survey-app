@@ -161,6 +161,8 @@ function updateProgress() {
   if(!!invalidQuestions.length) {
     percentage = ((length - invalidQuestions.length) / length) * 100;
     progressBar.css('width', percentage + '%');
+  } else {
+    progressBar.css('width', '100%');
   }
 }
 
