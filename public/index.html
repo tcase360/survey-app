@@ -129,19 +129,23 @@
 
   <div class="multiple-choice-container mui-container">
 
-    <div class="dropdown-question-header">
-      <h5><%= question %></h5>
+    <div class="mui-row">
+      <div class="dropdown-question-header">
+        <h5><%= question %></h5>
+      </div>
     </div>
 
-    <ul class="multiple-choice-list" data-group="dropdown-group--<%= code %>">
-      <% answers.forEach(function(element, index, array) { %>
-        <li class="mui-col-xs-12 mui-col-sm-6 mui-col-md-6 mui-col-lg-4 choice">
-          <a class="mui-btn mui-btn--primary mui-btn--flat multi-choice-answer-button" data-index="<%= element.key %>" data-checked="false">
-            <%= element.value %>
-          </a>
-        </li>
-      <% }); %>
-    </ul>
+    <div class="mui-row">
+      <ul class="multiple-choice-list" data-group="dropdown-group--<%= code %>">
+        <% answers.forEach(function(element, index, array) { %>
+          <li class="mui-col-xs-12 mui-col-sm-6 mui-col-md-6 mui-col-lg-6 choice">
+            <a class="mui-btn mui-btn--primary mui-btn--flat multi-choice-answer-button pull-left" data-index="<%= element.key %>" data-checked="false">
+              <%= element.value %>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
 
   </div>
 
