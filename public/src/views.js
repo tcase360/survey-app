@@ -18,6 +18,7 @@ var TextQuestionView = Backbone.View.extend({
   },
 
   inputText: function(event) {
+
     var value = $(event.target).val();
     var model = getModelFromCollection(this.model.cid);
     model.set({ 'answer': value });
@@ -26,7 +27,8 @@ var TextQuestionView = Backbone.View.extend({
       model.set({ validated: true });
     }
 
-    if(event.keyCode === 13) {
+    if(event.keyCode === 13 || event.keyCode === 9) {
+      event.preventDefault();
       this.nextButtonCheck(event);
     }
   },
@@ -47,7 +49,6 @@ var SingleChoiceQuestionView = Backbone.View.extend({
   className: 'question-container single-choice-question-container mui-container',
 
   intialize: function() {
-
     this.render();
   },
 
@@ -57,7 +58,34 @@ var SingleChoiceQuestionView = Backbone.View.extend({
   },
 
   events: {
-    'click .next-question-button': 'nextButtonCheck'
+    'click .next-question-button': 'nextButtonCheck',
+    'click .mui-select': 'setEventForDropdown'
+  },
+
+  setEventForDropdown: function(event) {
+    var self = this;
+    var target = $(event.currentTarget);
+    var menuList = target.find('.mui-select__menu');
+    var children = menuList.children();
+
+    children.one('click', function(event) {
+      var target = $(event.target);
+      var options = self.model.attributes.answers;
+      var value = target.text().trim();
+
+      var answer = options.filter(function(element, index) {
+        if(value === element.value) {
+          return element;
+        }
+      });
+
+      self.model.set({
+        answer: answer[0],
+        validated: true
+      });
+
+      viewNextQuestion(self);
+    });
   },
 
   nextButtonCheck: function(event) {
@@ -117,7 +145,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
         child.removeClass('active');
         child.addClass('mui-btn--flat');
       }
-    })
+    });
 
     var value = target.attr('data-checked');
 
@@ -172,7 +200,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 var YesNoQuestionView = Backbone.View.extend({
   className: 'question-container yes-no-question-container mui-container',
 
-  
+
 });
 
 var RatingQuestionView = Backbone.View.extend({
