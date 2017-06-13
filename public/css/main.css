@@ -125,15 +125,10 @@ body {
  */
 .text-question-container {
   max-width: 544px;
-  margin:auto;
+  margin: auto;
 }
-.question-container > .mui-textfield {
-  /*position: absolute;
-  top: 50%;
-  left: 25%;
-  height: 30%;
-  width: 98%;
-  margin: -15% 0 0 -25%;*/
+.text-question-container > .question-footer {
+  min-height: 50px;
 }
 
 
@@ -142,11 +137,16 @@ body {
  */
 
 .multiple-choice-list {
+  width: 100%;
   list-style: none;
+  display: inline-block;
+  padding-left: 0;
+}
+.multiple-choice-list > .choice > .multi-choice-answer-button {
+  min-width: 100px;
 }
 .button-checkbox {
   height: 36px;
-  width: 36px;
   display: inline-block;
 }
 .button-checkbox-text {
