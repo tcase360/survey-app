@@ -175,7 +175,7 @@ function updateProgress() {
 }
 
 function postSurveyData(data, callback) {
-
+callback();
 }
 
 function submitForm(e) {
@@ -183,7 +183,7 @@ function submitForm(e) {
 
   if(validity === true) {
     postSurveyData(questionsCollection.toJSON(), function(data) {
-      console.log(validity);
+      $('.submit-section--body').fadeIn('fast');
     });
   } else {
     $('html, body').animate({

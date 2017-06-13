@@ -9,7 +9,7 @@ body {
 .question-container {
   margin-bottom: 70px;
   min-height: 150px;
-  padding-top: 75px;
+  padding-top: 50px;
   position: relative;
   max-width: 544px;
   opacity: 0.3;
@@ -144,18 +144,10 @@ body {
 }
 
 .submit-section > .submit-section--body {
-  position: absolute;
-  top: 50%;
-  left: 25%;
-  height: 30%;
-  width: 98%;
-  margin: -15% 0 0 -25%;
+  text-align: center;
 }
 
 .submit-section > .submit-section--footer {
-  position: absolute;
-  bottom: 0;
-  width: 93%;
   text-align: center;
 }
 
