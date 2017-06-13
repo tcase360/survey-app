@@ -172,7 +172,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 var YesNoQuestionView = Backbone.View.extend({
   className: 'question-container yes-no-question-container mui-container',
 
-
+  
 });
 
 var RatingQuestionView = Backbone.View.extend({

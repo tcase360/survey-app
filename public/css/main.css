@@ -186,10 +186,10 @@ body {
  .progress {
    position: fixed;
    bottom: 0;
-   height: 4px;
+   height: 7px;
    display: block;
    width: 100%;
-   background-color: rgba(#2196f4, 0.67);
+   background-color: rgba(33, 150, 244, 0.33);
    border-radius: 2px;
    background-clip: padding-box;
    margin: 0 -25px -2px;
