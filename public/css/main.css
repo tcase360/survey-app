@@ -8,7 +8,8 @@ body {
  */
 .question-container {
   margin-bottom: 70px;
-  min-height: 300px;
+  min-height: 200px;
+  padding-top:100px;
   position: relative;
   max-width: 544px;
   opacity: 0.3;
@@ -22,9 +23,7 @@ body {
 }
 
 .question-footer {
-  position: absolute;
-  bottom: 0;
-  width: 93%;
+
 }
 
 /**
@@ -129,12 +128,12 @@ body {
   margin:auto;
 }
 .question-container > .mui-textfield {
-  position: absolute;
+  /*position: absolute;
   top: 50%;
   left: 25%;
   height: 30%;
   width: 98%;
-  margin: -15% 0 0 -25%;
+  margin: -15% 0 0 -25%;*/
 }
 
 
