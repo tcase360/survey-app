@@ -74,9 +74,11 @@ function formValidityCheck() {
      var currentQuestion = $('#' + model.attributes.id);
      var nextQuestion = currentQuestion.next();
 
+     var screen_height = $(window).height();
+
      if(!!nextQuestion.length) {
        $('html, body').animate({
-         scrollTop: (nextQuestion.offset().top)
+         scrollTop: (nextQuestion.offset().top - screen_height * 0.25)
        }, 250);
      } else {
        $('html, body').animate({
@@ -190,6 +192,7 @@ function submitForm(e) {
 function initializeSurvey(event) {
   $('#welcome-section').fadeOut('fast', function() {
       $('#container').fadeIn('fast', function() {
+        $('.progress').fadeIn('slow');
         $('#submit-section').fadeIn('fast');
         $('body').unbind('keydown');
         $('.question-container').first().addClass('active');

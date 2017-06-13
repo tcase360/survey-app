@@ -101,6 +101,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
   },
 
   chooseOption: function(event) {
+    var self = this;
     var model = getModelFromCollection(this.model.cid);
     var target = $(event.target);
     var link = target.find('a');
@@ -151,6 +152,12 @@ var MultiChoiceQuestionView = Backbone.View.extend({
       answer: newArray,
       validated: validated
     })
+
+    if (validated) {
+      setTimeout(function() {
+        viewNextQuestion(self);
+      }, 200);
+    }
   },
 
   nextButton: function(event) {
@@ -165,7 +172,7 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 var YesNoQuestionView = Backbone.View.extend({
   className: 'question-container yes-no-question-container mui-container',
 
-  
+
 });
 
 var RatingQuestionView = Backbone.View.extend({
