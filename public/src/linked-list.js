@@ -63,15 +63,15 @@ var mockData = {
           "countCode": 3,
           "cssLabel": "label-primary"
         },
-        // {
-        //   "code": 4,
-        //   "type": "yesNo",
-        //   "question": "yes/no",
-        //   "yesLabel": "Yes",
-        //   "noLabel": "No",
-        //   "required": true,
-        //   "cssLabel": "label-info"
-        // },
+        {
+          "code": 4,
+          "type": "yesNo",
+          "question": "yes/no",
+          "yesLabel": "Yes",
+          "noLabel": "No",
+          "required": true,
+          "cssLabel": "label-info"
+        },
         // {
         //   "code": 5,
         //   "type": "rating",

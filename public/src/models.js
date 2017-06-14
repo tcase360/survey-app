@@ -4,7 +4,6 @@ var QuestionModel = Backbone.Model.extend({
   initialize: function() {
     this.attributes.id = 'question-element--' + this.attributes.code;
 
-
     switch (this.type) {
       case('text'): {
         this.questionObject = new TextQuestionModel(this);
@@ -37,8 +36,6 @@ var TextQuestionModel = Backbone.Model.extend({
     this.maxLength = this.attributes.maxLength;
   },
 
-  
-
   defaults: {
     answer: null,
     validated: false,
@@ -69,7 +66,10 @@ var MultiChoiceQuestionModel = Backbone.Model.extend({
 });
 
 var YesNoQuestionModel = Backbone.Model.extend({
-
+  defaults: {
+    answer: null,
+    validated: false
+  }
 });
 
 var RatingQuestionModel = Backbone.Model.extend({

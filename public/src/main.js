@@ -175,7 +175,7 @@ function updateProgress() {
 }
 
 function postSurveyData(data, callback) {
-callback();
+  callback();
 }
 
 function submitForm(e) {

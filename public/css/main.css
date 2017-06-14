@@ -2,17 +2,21 @@ body {
   margin-top: 100px;
   padding: 25px;
 }
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
 /**
  * General Styles
  */
 .question-container {
-  margin-bottom: 70px;
   min-height: 150px;
-  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
   max-width: 544px;
-  opacity: 0.3;
+  opacity: 0.2;
   -webkit-transition: opacity 250ms;
      -moz-transition: opacity 250ms;
           transition: opacity 250ms;
@@ -42,13 +46,11 @@ body {
 }
 
 .rating-header {
-  text-align:center;
-  margin:auto;
+  margin: auto;
 }
 
 .rate {
-  width: 150px;
-  margin: auto;
+  float: left;  
   height: 30px;
   padding: 0 10px;
 }
@@ -83,7 +85,6 @@ body {
 }
 
 .dropdown-question-header {
-  text-align:center;
   margin:auto;
 }
 
@@ -181,3 +182,76 @@ footer {
      bottom: 0;
      background-color: #2196F3;
      transition: width .3s linear; }
+
+
+ /**
+  * Yes/No question section
+  */
+button {
+  align-items: flex-start;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 9px 18px;
+  font-size: 14px;
+  line-height: 1.57143;
+  border-radius: 2px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.c4w-btn-group {
+  color: #2196F3;
+  display: flex;
+  display: inline-block;
+}
+
+.c4w-btn-group > .btn {
+  background: transparent;
+  position: relative;
+  float: left;
+}
+
+.c4w-btn-group > .btn > .fa-times {
+  color: #d44950;
+}
+
+.c4w-btn-group > .btn > .fa-check {
+  color: #21b384;
+}
+
+.c4w-btn-group > .btn.btn-default {
+  text-align: center;
+  padding: 18px;
+  white-space: normal;
+  border-color: #E2E6E6;
+  margin-right: 10px;
+  min-width: 120px;
+  margin-left: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 1px 0;
+  transition: box-shadow .25s border-color .5s background-color .5s;
+}
+
+.c4w-btn-group > .btn.btn-default:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 3px 0;
+  background-color: rgb(242, 249, 253);
+}
+
+.c4w-btn-group > .btn.btn-default:active,
+.c4w-btn-group > .btn.btn-default:focus {
+  border-color: #2196F3;
+  background-color: rgb(242, 249, 253);
+  outline: 0;
+}
