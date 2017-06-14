@@ -229,12 +229,13 @@ var YesNoQuestionView = Backbone.View.extend({
 
   handleButtonClick: function(event) {
     var self = this;
-    var target = $(event.target);
+    var target = $(event.currentTarget);
+    var value = target.data().answer;
     var model = self.model;
     var answer;
 
-    if(target === 'yes') answer = true;
-    if(target === 'no') answer = false;
+    if(value === 'yes') answer = true;
+    if(value === 'no') answer = false;
 
     model.set({
       'answer': target,
