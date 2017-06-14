@@ -99,39 +99,39 @@ var mockData = {
         //   "cssLabel": "label-warning",
         //   "styleLock": false
         // },
-        // {
-        //   "code": 8,
-        //   "type": "form",
-        //   "question": "hello world this is a form",
-        //   "required": true,
-        //   "override": false,
-        //   "fields": [
-        //     {
-        //       "key": "first_name",
-        //       "value": "first name"
-        //     }, {
-        //       "key": "email",
-        //       "value": "email"
-        //     }, {
-        //       "key": "last_name",
-        //       "value": "last name"
-        //     }, {
-        //       "key": "document_type",
-        //       "value": "document type"
-        //     }, {
-        //       "key": "document_number",
-        //       "value": "document number"
-        //     }, {
-        //       "key": "gender",
-        //       "value": "gender"
-        //     }, {
-        //       "key": "birth_date",
-        //       "value": "birth date"
-        //     }
-        //   ],
-        //   "cssLabel": "label-danger",
-        //   "filterFields": []
-        // }
+        {
+          "code": 8,
+          "type": "form",
+          "question": "hello world this is a form",
+          "required": true,
+          "override": false,
+          "fields": [
+            {
+              "key": "first_name",
+              "value": "first name"
+            }, {
+              "key": "email",
+              "value": "email"
+            }, {
+              "key": "last_name",
+              "value": "last name"
+            }, {
+              "key": "document_type",
+              "value": "document type"
+            }, {
+              "key": "document_number",
+              "value": "document number"
+            }, {
+              "key": "gender",
+              "value": "gender"
+            }, {
+              "key": "birth_date",
+              "value": "birth date"
+            }
+          ],
+          "cssLabel": "label-danger",
+          "filterFields": []
+        }
       ],
       "questionCount": 8
     },

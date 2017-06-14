@@ -76,9 +76,9 @@ var SingleChoiceQuestionView = Backbone.View.extend({
     var children = menuList.children();
     $(children[0]).remove();
     var height = menuList.height();
-    menuList.css('height', height - 50 + 'px');
+    menuList.css('height', height - 30 + 'px');
 
-    children.one('click', function(event) {
+    children.unbind().one('click', function(event) {
       var target = $(event.target);
       var options = self.model.attributes.answers;
       var value = target.text().trim();
