@@ -208,7 +208,45 @@ var MultiChoiceQuestionView = Backbone.View.extend({
 });
 
 var YesNoQuestionView = Backbone.View.extend({
+  template: _.template($('#yesNoQuestionTemplate').html()),
+
+  tagName: 'div',
+
   className: 'question-container yes-no-question-container mui-container',
+
+  events: {
+    'click button': 'handleButtonClick',
+  }
+
+  initialize: function() {
+    this.render();
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  },
+
+  handleButtonClick: function(event) {
+    var self = this;
+    var target = $(event.target);
+    var model = self.model;
+    var answer;
+
+    console.log(target.data());
+
+    if(target === 'yes') answer = true;
+    if(target === 'no') answer = false;
+
+    model.set({
+      'answer': target,
+      'validated': true
+    });
+
+    setTimeout(function() {
+      viewNextQuestion(self);
+    }, 500);
+  }
 
 
 });
