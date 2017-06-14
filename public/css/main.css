@@ -7,12 +7,11 @@ body {
  * General Styles
  */
 .question-container {
-  margin-bottom: 70px;
   min-height: 150px;
-  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
   max-width: 544px;
-  opacity: 0.3;
+  opacity: 0.2;
   -webkit-transition: opacity 250ms;
      -moz-transition: opacity 250ms;
           transition: opacity 250ms;

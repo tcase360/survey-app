@@ -76,7 +76,7 @@
 <script type="text/template" id="starRatingTemplate">
 
   <div class="rating-header">
-    <h5><%= question %></h5>
+    <h4><%= question %></h4>
   </div>
 
   <div class="rate">
@@ -93,7 +93,7 @@
 
   <div class="dropdown-question-container">
     <div class="dropdown-question-header">
-      <h5><%= question %></h5>
+      <h4><%= question %></h4>
     </div>
 
     <div class="mui-select">
@@ -136,7 +136,7 @@
 
     <div class="mui-row">
       <div class="dropdown-question-header">
-        <h5><%= question %></h5>
+        <h4><%= question %></h4>
       </div>
     </div>
 
@@ -148,6 +148,35 @@
               <%= element.value %>
             </a>
           </li>
+        <% }); %>
+      </ul>
+    </div>
+
+  </div>
+
+</script>
+
+<script type="text/template" id="formTemplate">
+
+  <div class="form-container mui-container">
+
+    <div class="mui-row">
+      <div class="dropdown-question-header">
+        <h4><%= question %></h4>
+      </div>
+    </div>
+
+    <div class="mui-row">
+      <ul class="multiple-choice-list" data-group="dropdown-group--<%= code %>">
+        <% answers.forEach(function(element, index, array) { %>
+          <% if(element.key === 'gender') { %>
+
+          <% } else if(element.key === 'birth_date') { %>
+
+          <% } else { %>
+            <label for="<%= element.key %>"><%= element.label %></label>
+            <input id="<%= element.key %>" type="text"/>
+          <% } %>
         <% }); %>
       </ul>
     </div>
