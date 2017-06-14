@@ -46,13 +46,11 @@ body {
 }
 
 .rating-header {
-  text-align:center;
-  margin:auto;
+  margin: auto;
 }
 
 .rate {
-  width: 150px;
-  margin: auto;
+  float: left;  
   height: 30px;
   padding: 0 10px;
 }
@@ -87,7 +85,6 @@ body {
 }
 
 .dropdown-question-header {
-  text-align:center;
   margin:auto;
 }
 
