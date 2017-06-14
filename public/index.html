@@ -33,22 +33,26 @@
 
 <div class="submit-section mui-container" style="display:none;" id="submit-section">
 
-  <div class="submit-section--body">
+  <div class="submit-section--body" style="display:none;">
     Thank you for completing the survey! Please press submit
   </div>
 
   <div class="submit-section--footer">
 
-    <span class="mui--pull-right">
+    <span>
       <a class="mui-btn mui-btn--success" id="form-submit-button">Submit</a>
     </span>
 
   </div>
 </div>
 
-<div class="progress" style="display:none;">
-  <div class="determinate" style="width:0%"></div>
-</div>
+<footer style="display:none;">
+  <div class="pull-left progress-counter">1/1</div>
+  <div class="progress">
+    <div class="determinate" style="width:0%"></div>
+  </div>
+</footer>
+
 
 
 <!-- <div id="loading_overlay" className="animate show loading-container" style="display:block; position:absolute; min-height:450px; width:100%;">
@@ -97,6 +101,7 @@
         Pick an Option
       </legend>
       <select class="mui-dropdown__menu" data-group="dropdown-group--<% code %>">
+          <option data-index="false"><a>Pick an Option</a></option>
         <% answers.forEach(function(element, index, array) { %>
           <option data-index="<%= element.key %>"><a><%= element.value %></a></option>
         <% }) %>

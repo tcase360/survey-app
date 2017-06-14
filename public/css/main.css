@@ -8,8 +8,8 @@ body {
  */
 .question-container {
   margin-bottom: 70px;
-  min-height: 200px;
-  padding-top:100px;
+  min-height: 150px;
+  padding-top: 50px;
   position: relative;
   max-width: 544px;
   opacity: 0.3;
@@ -22,35 +22,15 @@ body {
   opacity: 1;
 }
 
-.question-footer {
-
-}
 
 /**
  * Welcome message section
  */
 
-.welcome-message {
-
-}
 
 .welcome-message--body, .welcome-message--footer {
   text-align: center;
 }
-
-.mui-btn {
-
-}
-
-.mui-btn.mui-btn--success {
-
-}
-
-.mui-btn--success {
-
-}
-
-
 
 /**
  * Star rating system section
@@ -164,24 +144,23 @@ body {
 }
 
 .submit-section > .submit-section--body {
-  position: absolute;
-  top: 50%;
-  left: 25%;
-  height: 30%;
-  width: 98%;
-  margin: -15% 0 0 -25%;
+  text-align: center;
 }
 
 .submit-section > .submit-section--footer {
-  position: absolute;
-  bottom: 0;
-  width: 93%;
   text-align: center;
 }
 
 /**
  * Progress bar
  */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 25px;
+  background: transparent;
+}
 
  .progress {
    position: fixed;
