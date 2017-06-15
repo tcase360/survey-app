@@ -319,14 +319,23 @@ var FormQuestionView = Backbone.View.extend({
     var radioValue = this.checkRadioValue(container);
     var birthDate = this.checkBirthdateInput(container);
 
+    var validated = false;
+
     console.log(radioValue);
     console.log(birthDate);
 
     var list = container.find('li:not([data-writable="false"])').toArray();
 
-    var validatedArray = list.map(function(element, index, array) {
-
+    var unvalidatedArray = list.filter(function(element, index, array) {
+      var value = $(element).val();
+      if(value.length === 0) {
+        return element;
+      }
     });
+
+    if(unvalidatedArray.length === 0 && radioValue.validated && birthDate.validated) {
+      validated = true;
+    }
   },
 
   checkRadioValue: function(container) {
@@ -335,12 +344,21 @@ var FormQuestionView = Backbone.View.extend({
       var radioValue;
 
       if(radioChecked.length) {
-        radioValue = radioChecked.val();
+        return {
+          value: radioChecked.val(),
+          validated: true
+      } else {
+        return {
+          value: undefined,
+          validated: false
+        }
       }
 
-      return radioValue;
     } else {
-      return 'already_written';
+      return {
+        value: undefined,
+        validated: true
+      }
     }
   },
 
@@ -352,12 +370,22 @@ var FormQuestionView = Backbone.View.extend({
       var date;
 
       if(!!monthInput || !!dayInput || !!yearInput) {
+        return {
+          value: monthInput + '/' + dayInput + '/' + yearInput,
+          validated: true
+        }
         date = monthInput + '/' + dayInput + '/' + yearInput;
+      } else {
+        return {
+          value: undefined,
+          validated: false
+        }
       }
-
-      return date;
     } else {
-      return 'already_written';
+      return {
+        value: undefined,
+        validated: true
+      };
     }
   }
 
