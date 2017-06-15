@@ -246,7 +246,7 @@ function detectActiveDiv(event) {
 $(document).ready(function() {
   $.ajax({
     method: 'GET',
-    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSdk(),
+    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk(),
     success: function(data) {
       console.log(data);
       var questions = data.data.questions.map(function(element, index, arr) {
