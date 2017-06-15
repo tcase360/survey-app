@@ -8,7 +8,7 @@ var TextQuestionView = Backbone.View.extend({
   },
 
   events: {
-     'keydown': 'inputText',
+     'keyup': 'inputText',
      'click .next-question-button': 'nextButtonCheck'
   },
 
@@ -76,9 +76,9 @@ var SingleChoiceQuestionView = Backbone.View.extend({
     var children = menuList.children();
     $(children[0]).remove();
     var height = menuList.height();
-    menuList.css('height', height - 50 + 'px');
+    menuList.css('height', height - 30 + 'px');
 
-    children.one('click', function(event) {
+    children.unbind().one('click', function(event) {
       var target = $(event.target);
       var options = self.model.attributes.answers;
       var value = target.text().trim();
@@ -294,5 +294,122 @@ var RatingQuestionView = Backbone.View.extend({
 });
 
 var FormQuestionView = Backbone.View.extend({
-  className: 'question-container'
+  template: _.template($('#formTemplate').html()),
+
+  className: 'question-container form-question-container mui-container',
+
+  initialize: function() {
+    this.render();
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  },
+
+  events: {
+    'keyup input': 'handleTyping',
+    'click input': 'handleTyping',
+  },
+
+  handleTyping: function(event) {
+    var self = this;
+    var model = self.model;
+    var target = $(event.target);
+    var container = target.closest('.form-inputs-list');
+
+    var radioValue = this.checkRadioValue(container);
+    var birthDate = this.checkBirthdateInput(container);
+
+    var validated = false;
+
+    var list = container.find('li:not([data-writable="false"])').toArray();
+
+    var validatedArray = list.filter(function(element, index, array) {
+      var value = $(element).find('input').val();
+      if(value.length > 0) {
+        return {
+          value: value,
+          key: $(element).data().key
+        }
+      }
+    });
+
+    if(validatedArray.length === list.length && radioValue.validated && birthDate.validated) {
+      if(radioValue.value) {
+        validatedArray.push({
+          value: radioValue.value,
+          key: 'gender'
+        });
+      }
+      if(birthDate.value) {
+        validatedArray.push({
+          value: birthDate.value,
+          key: 'birth_date'
+        })
+      }
+      validated = true;
+      model.set({
+        answer: validatedArray,
+        validated: true
+      });
+
+      if(event.keyCode === 13) {
+        viewNextQuestion(self);
+      }
+    }
+  },
+
+  checkRadioValue: function(container) {
+    if(container.find('input:radio[name="gender"]').length) {
+      var radioChecked = container.find('input:radio[name="gender"]:checked');
+      var radioValue;
+
+      if(radioChecked.length) {
+        return {
+          value: radioChecked.val(),
+          validated: true
+        }
+      } else {
+        return {
+          value: undefined,
+          validated: false
+        }
+      }
+
+    } else {
+      return {
+        value: undefined,
+        validated: true
+      }
+    }
+  },
+
+  checkBirthdateInput: function(container) {
+    if(container.find('.dob--month-input').length) {
+      var monthInput = container.find('.dob--month-input').val();
+      var dayInput = container.find('.dob--day-input').val();
+      var yearInput = container.find('.dob--year-input').val();
+      var date;
+
+      if(!!monthInput || !!dayInput || !!yearInput) {
+        return {
+          value: monthInput + '/' + dayInput + '/' + yearInput,
+          validated: true
+        }
+        date = monthInput + '/' + dayInput + '/' + yearInput;
+      } else {
+        return {
+          value: undefined,
+          validated: false
+        }
+      }
+    } else {
+      return {
+        value: undefined,
+        validated: true
+      };
+    }
+  }
+
 });

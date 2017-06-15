@@ -4,7 +4,7 @@ var QuestionModel = Backbone.Model.extend({
   initialize: function() {
     this.attributes.id = 'question-element--' + this.attributes.code;
 
-    switch (this.type) {
+    switch (this.attributes.type) {
       case('text'): {
         this.questionObject = new TextQuestionModel(this);
       } break;
@@ -85,5 +85,20 @@ var RatingQuestionModel = Backbone.Model.extend({
 });
 
 var FormQuestionModel = Backbone.Model.extend({
+  initialize: function() {
+    var array = this.attributes.attributes.fields.map(function(element, index, array) {
+      var answer = mockData.customer[element.key];
+      return {
+        key: element.key,
+        label: element.value,
+        answer: answer
+      }
+    });
+    this.attributes.set('fields', array);
+  },
 
+  defaults: {
+    validated: false,
+    answers: false
+  }
 });
