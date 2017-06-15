@@ -255,4 +255,21 @@ $(document).ready(function() {
  MYAPPS.renderNavbar({
    //options
  });
+
+ var trigger = MYAPPS.getNextUrl();
+
+
+ MYAPPS.getSk = function() {
+   var url = window.location.href;
+   var name = 'sk';
+   let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+       results = regex.exec(url);
+   if (!results) return null;
+   if (!results[2]) return '';
+   return decodeURIComponent(results[2].replace(/\+/g, " "));
+ }
+
+ console.log(MYAPPS.getSk());
+
+ $('body').css('margin-top', '100px');
 });
