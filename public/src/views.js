@@ -8,7 +8,7 @@ var TextQuestionView = Backbone.View.extend({
   },
 
   events: {
-     'keydown': 'inputText',
+     'keyup': 'inputText',
      'click .next-question-button': 'nextButtonCheck'
   },
 
@@ -308,16 +308,19 @@ var FormQuestionView = Backbone.View.extend({
   },
 
   events: {
-    'keydown input': 'handleTyping',
+    'keyup input': 'handleTyping',
     'click input': 'handleTyping',
   },
 
   handleTyping: function(event) {
-    var target = $(this.target);
+    var target = $(event.target);
     var container = target.closest('.form-inputs-list');
 
-    this.checkRadioValue(container);
-    this.checkBirthdateInput(container);
+    var radioValue = this.checkRadioValue(container);
+    var birthDate = this.checkBirthdateInput(container);
+
+    console.log(radioValue);
+    console.log(birthDate);
 
     var list = container.find('li:not([data-writable="false"])').toArray();
 
@@ -327,27 +330,35 @@ var FormQuestionView = Backbone.View.extend({
   },
 
   checkRadioValue: function(container) {
-    var radioChecked = container.find('input:radio[name ="gender"]:checked');
-    var radioValue;
+    if(!container.find('input:radio[name="gender"]').length) {
+      var radioChecked = container.find('input:radio[name="gender"]:checked');
+      var radioValue;
 
-    if(radioChecked.length) {
-      radioValue = radioChecked.val();
+      if(radioChecked.length) {
+        radioValue = radioChecked.val();
+      }
+
+      return radioValue;
+    } else {
+      return 'already_written';
     }
-
-    return radioValue;
   },
 
   checkBirthdateInput: function(container) {
-    var monthInput = container.find('.dob--month-input').val();
-    var dayInput = container.find('.dob--day-input').val();
-    var yearInput = container.find('.dob--year-input').val();
-    var date;
+    if(!container.find('.dob--month-input').length) {
+      var monthInput = container.find('.dob--month-input').val();
+      var dayInput = container.find('.dob--day-input').val();
+      var yearInput = container.find('.dob--year-input').val();
+      var date;
 
-    if(!!monthInput || !!dayInput || !!yearInput) {
-      date = monthInput + '/' + dayInput + '/' + yearInput;
+      if(!!monthInput || !!dayInput || !!yearInput) {
+        date = monthInput + '/' + dayInput + '/' + yearInput;
+      }
+
+      return date;
+    } else {
+      return 'already_written';
     }
-
-    return date;
   }
 
 });

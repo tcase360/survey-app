@@ -228,9 +228,9 @@
             <% if(element.key === 'gender') { %>
 
               <ul class="radio">
-                <li><input type="radio" name="gender" id="male" value="in" /><label for="male">Male</label></label></li>
-                <li><input type="radio" name="gender" id="female" value="out" /><label for="female">Female</label></li>
-                <li><input type="radio" name="gender" id="other" value="delivery" /><label for="other">Other</label></li>
+                <li><input type="radio" name="gender" id="male" value="male" /><label for="male">Male</label></label></li>
+                <li><input type="radio" name="gender" id="female" value="female" /><label for="female">Female</label></li>
+                <li><input type="radio" name="gender" id="other" value="other" /><label for="other">Other</label></li>
               </ul>
 
             <% } else if(element.key === 'birth_date') { %>
@@ -243,7 +243,7 @@
             <% } else { %>
 
               <div class="mui-textfield">
-                <label for="">label</label>
+                <label for=""><%= element.label %></label>
                 <input type="text" maxlength="50"/>
               </div>
 
