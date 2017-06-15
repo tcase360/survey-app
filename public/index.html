@@ -15,53 +15,7 @@
 
 </head>
 <body>
-
-<!-- <ul class="form-question-container mui-container">
-  <li class="form-field" data-key="first_name">
-    <div class="mui-textfield">
-      <label for="">label</label>
-      <input type="text" maxlength="50"/>
-    </div>
-  </li>
-  <li class="form-field" data-key="last_name">
-    <div class="mui-textfield">
-      <label for="">label</label>
-      <input type="text" maxlength="50"/>
-    </div>
-  </li>
-  <li class="form-field" data-key="email">
-    <div class="mui-textfield">
-      <label for="">label</label>
-      <input type="text" maxlength="50"/>
-    </div>
-  </li>
-  <li class="form-field" data-key="document_type">
-    <div class="mui-textfield">
-      <label for="">label</label>
-      <input type="text" maxlength="50"/>
-    </div>
-  </li>
-  <li class="form-field" data-key="document_number">
-    <div class="mui-textfield">
-      <label for="">label</label>
-      <input type="text" maxlength="50"/>
-    </div>
-  </li>
-  <li class="form-field">
-    <label>Date of birth</label>
-    <input class="dob--month-input" type="text" maxlength="2"/> /
-    <input class="dob--day-input" type="text" maxlength="2"/> /
-    <input class="dob--year-input" type="text" maxlength="4"/>
-  </li>
-  <li class="form-field">
-    <ul class="radio">
-      <li><input type="radio" name="gender" id="male" value="in" /><label for="male">Male</label></label></li>
-      <li><input type="radio" name="gender" id="female" value="out" /><label for="female">Female</label></li>
-      <li><input type="radio" name="gender" id="other" value="delivery" /><label for="other">Other</label></li>
-    </ul>
-  </li>
-</ul> -->
-
+  
 <div class="welcome-message" id="welcome-section">
   <div class="welcome-message--body">
     <h3>
@@ -205,7 +159,7 @@
 
 <script type="text/template" id="formTemplate">
 
-  <div class="form-container mui-container">
+  <div class="form-container mui-container-fluid">
 
     <div class="mui-row">
       <div class="dropdown-question-header">
@@ -217,14 +171,12 @@
       <ul class="form-inputs-list" data-group="dropdown-group--<%= code %>">
         <% fields.forEach(function(element, index, array) { %>
 
-
-
           <% if(element.answer !== '') { %>
-          <li class="form-input" data-key="<%= element.key %>" data-writable="false">
+          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="<%= element.key %>" data-writable="false">
             <span>element.label</span><span>element.answer</span>
           </li>
           <% } else { %>
-          <li class="form-input" data-key="<%= element.key %>" data-writable="true">
+          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="<%= element.key %>" data-writable="true">
             <% if(element.key === 'gender') { %>
 
               <ul class="radio">
@@ -235,10 +187,12 @@
 
             <% } else if(element.key === 'birth_date') { %>
 
-              <label><%= element.label %></label>
-              <input class="dob--month-input" type="text" maxlength="2"/> /
-              <input class="dob--day-input" type="text" maxlength="2"/> /
-              <input class="dob--year-input" type="text" maxlength="4"/>
+              <div class="mui-textfield">
+                <label><%= element.label %></label>
+                <input class="dob--month-input" placeholder="MM" type="number" min="1" max="12"/> /
+                <input class="dob--day-input" placeholder="DD" type="number" min="1" max="31"/> /
+                <input class="dob--year-input" placeholder="YYYY" type="number" min="1900" max="2017"/>
+              </div>
 
             <% } else { %>
 
