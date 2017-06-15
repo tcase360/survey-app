@@ -50,7 +50,7 @@ body {
 }
 
 .rate {
-  float: left;  
+  float: left;
   height: 30px;
   padding: 0 10px;
 }
@@ -254,4 +254,19 @@ button {
   border-color: #2196F3;
   background-color: rgb(242, 249, 253);
   outline: 0;
+}
+
+/**
+ * Form section
+ */
+.form-container {
+  max-width: 970px;
+  list-style: none;
+}
+
+.form-container > li > .mui-textfield {
+  float: left;
+  display: inline-block;
+  width: 45%;
+  margin-right: 10px;
 }

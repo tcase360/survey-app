@@ -294,5 +294,60 @@ var RatingQuestionView = Backbone.View.extend({
 });
 
 var FormQuestionView = Backbone.View.extend({
-  className: 'question-container'
+  template: _.template($('#formTemplate').html()),
+
+  className: 'question-container form-question-container mui-container',
+
+  initialize: function() {
+    this.render();
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  },
+
+  events: {
+    'keydown input': 'handleTyping',
+    'click input': 'handleTyping',
+  },
+
+  handleTyping: function(event) {
+    var target = $(this.target);
+    var container = target.closest('.form-inputs-list');
+
+    this.checkRadioValue(container);
+    this.checkBirthdateInput(container);
+
+    var list = container.find('li:not([data-writable="false"])').toArray();
+
+    var validatedArray = list.map(function(element, index, array) {
+
+    });
+  },
+
+  checkRadioValue: function(container) {
+    var radioChecked = container.find('input:radio[name ="gender"]:checked');
+    var radioValue;
+
+    if(radioChecked.length) {
+      radioValue = radioChecked.val();
+    }
+
+    return radioValue;
+  },
+
+  checkBirthdateInput: function(container) {
+    var monthInput = container.find('.dob--month-input').val();
+    var dayInput = container.find('.dob--day-input').val();
+    var yearInput = container.find('.dob--year-input').val();
+    var date;
+
+    if(!!monthInput || !!dayInput || !!yearInput) {
+      date = monthInput + '/' + dayInput + '/' + yearInput;
+    }
+
+    return date;
+  }
+
 });
