@@ -247,6 +247,7 @@ $(document).ready(function() {
   $.ajax({
     method: 'GET',
     url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk(),
+    type: 'json',
     success: function(data) {
       console.log(data);
       var questions = data.data.questions.map(function(element, index, arr) {
