@@ -93,12 +93,7 @@ function formValidityCheck() {
 
  var questionsCollection = new QuestionsCollection;
 
- var questions = mockData.data.questions.map(function(element, index, arr) {
-   element.skipBtnLabel = mockData.data.skipBtnLabel;
-   element.nextBtnLabel = mockData.data.nextBtnLabel;
-   var question = new QuestionModel(element);
-   questionsCollection.add(question);
- });
+
 
  questionsCollection.each(function(question) {
    var questionView;
@@ -249,6 +244,20 @@ function detectActiveDiv(event) {
 }
 
 $(document).ready(function() {
+  $.ajax({
+    method: 'GET',
+    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSdk(),
+    success: function(data) {
+      console.log(function);
+      var questions = data.data.questions.map(function(element, index, arr) {
+        element.skipBtnLabel = data.data.skipBtnLabel;
+        element.nextBtnLabel = data.data.nextBtnLabel;
+        var question = new QuestionModel(element);
+        questionsCollection.add(question);
+      });
+    }
+  })
+
  $('#form-submit-button').on('click', submitForm);
  $('#initialize-survey').on('click', initializeSurvey);
  $('body').on('keydown', detectEnterKey);
