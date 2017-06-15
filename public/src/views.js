@@ -66,7 +66,12 @@ var SingleChoiceQuestionView = Backbone.View.extend({
 
   events: {
     'click .next-question-button': 'nextButtonCheck',
-    'click .mui-select': 'setEventForDropdown'
+    'click .mui-select': 'setEventForDropdown',
+    'select change': 'selectChangeHandle'
+  },
+
+  selectChangeHandle: function(event) {
+    console.log(arguments);
   },
 
   setEventForDropdown: function(event) {
