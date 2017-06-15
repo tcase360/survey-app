@@ -248,7 +248,7 @@ $(document).ready(function() {
     method: 'GET',
     url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSdk(),
     success: function(data) {
-      console.log(function);
+      console.log(data);
       var questions = data.data.questions.map(function(element, index, arr) {
         element.skipBtnLabel = data.data.skipBtnLabel;
         element.nextBtnLabel = data.data.nextBtnLabel;
@@ -267,19 +267,6 @@ $(document).ready(function() {
  });
 
  var trigger = MYAPPS.getNextUrl();
-
-
- MYAPPS.getSk = function() {
-   var url = window.location.href;
-   var name = 'sk';
-   let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-       results = regex.exec(url);
-   if (!results) return null;
-   if (!results[2]) return '';
-   return decodeURIComponent(results[2].replace(/\+/g, " "));
- }
-
- console.log(MYAPPS.getSk());
 
  $('body').css('margin-top', '100px');
 });
