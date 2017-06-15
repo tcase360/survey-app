@@ -27,9 +27,9 @@
   */
 
   _.templateSettings = {
-    evaluate: /\{\{(?!=)(.*?)\}\}/g,
-    interpolate: /\{\{=([^}]*)\}\}/g,
-    escape: /\{\{-([^}]*)\}\}/g
+      evaluate: /\{\{(.+?)\}\}/g,
+      interpolate: /\{\{=(.+?)\}\}/g,
+      escape: /\{\{-(.+?)\}\}/g
   };
 
 
