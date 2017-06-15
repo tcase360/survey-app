@@ -313,6 +313,8 @@ var FormQuestionView = Backbone.View.extend({
   },
 
   handleTyping: function(event) {
+    var self = this;
+    var model = self.model;
     var target = $(event.target);
     var container = target.closest('.form-inputs-list');
 
@@ -321,25 +323,45 @@ var FormQuestionView = Backbone.View.extend({
 
     var validated = false;
 
-    console.log(radioValue);
-    console.log(birthDate);
-
     var list = container.find('li:not([data-writable="false"])').toArray();
 
-    var unvalidatedArray = list.filter(function(element, index, array) {
-      var value = $(element).val();
-      if(value.length === 0) {
-        return element;
+    var validatedArray = list.filter(function(element, index, array) {
+      var value = $(element).find('input').val();
+      if(value.length > 0) {
+        return {
+          value: value,
+          key: $(element).data().key
+        }
       }
     });
 
-    if(unvalidatedArray.length === 0 && radioValue.validated && birthDate.validated) {
+    if(validatedArray.length === list.length && radioValue.validated && birthDate.validated) {
+      if(radioValue.value) {
+        validatedArray.push({
+          value: radioValue.value,
+          key: 'gender'
+        });
+      }
+      if(birthDate.value) {
+        validatedArray.push({
+          value: birthDate.value,
+          key: 'birth_date'
+        })
+      }
       validated = true;
+      model.set({
+        answer: validatedArray,
+        validated: true
+      });
+
+      if(event.keyCode === 13) {
+        viewNextQuestion(self);
+      }
     }
   },
 
   checkRadioValue: function(container) {
-    if(!container.find('input:radio[name="gender"]').length) {
+    if(container.find('input:radio[name="gender"]').length) {
       var radioChecked = container.find('input:radio[name="gender"]:checked');
       var radioValue;
 
@@ -347,6 +369,7 @@ var FormQuestionView = Backbone.View.extend({
         return {
           value: radioChecked.val(),
           validated: true
+        }
       } else {
         return {
           value: undefined,
@@ -363,7 +386,7 @@ var FormQuestionView = Backbone.View.extend({
   },
 
   checkBirthdateInput: function(container) {
-    if(!container.find('.dob--month-input').length) {
+    if(container.find('.dob--month-input').length) {
       var monthInput = container.find('.dob--month-input').val();
       var dayInput = container.find('.dob--day-input').val();
       var yearInput = container.find('.dob--year-input').val();
