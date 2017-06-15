@@ -252,4 +252,7 @@ $(document).ready(function() {
  $('#initialize-survey').on('click', initializeSurvey);
  $('body').on('keydown', detectEnterKey);
  $(window).on('scroll', detectActiveDiv);
+ MYAPPS.renderNavbar({
+   //options
+ });
 });
