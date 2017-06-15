@@ -77,14 +77,14 @@
 <script type="text/template" id="starRatingTemplate">
 
   <div class="rating-header">
-    <h4><%= question %></h4>
+    <h4>{{ question }}</h4>
   </div>
 
   <div class="rate">
-    <% for(var x = 5; x > 0; x--) { %>
-      <input type="radio" id="star-<%= x %>" class="ratingInput" name="rate-group--<%= code %>" value="<%= x %>"/>
-      <label for="star-<%= x %>" title="text"><%= x %> stars</label>
-    <% } %>
+    {{ for(var x = 5; x > 0; x--) { }}
+      <input type="radio" id="star-{{ x }}" class="ratingInput" name="rate-group--{{ code }}" value="{{ x }}"/>
+      <label for="star-{{ x }}" title="text">{{ x }} stars</label>
+    {{ } }}
   </div>
 
 </script>
@@ -94,18 +94,18 @@
 
   <div class="dropdown-question-container">
     <div class="dropdown-question-header">
-      <h4><%= question %></h4>
+      <h4>{{ question }}</h4>
     </div>
 
     <div class="mui-select">
       <legend>
         Pick an Option
       </legend>
-      <select class="mui-dropdown__menu" data-group="dropdown-group--<% code %>">
+      <select class="mui-dropdown__menu" data-group="dropdown-group--{{ code }}">
           <option data-index="false"><a>Pick an Option</a></option>
-        <% answers.forEach(function(element, index, array) { %>
-          <option data-index="<%= element.key %>"><a><%= element.value %></a></option>
-        <% }) %>
+        {{ answers.forEach(function(element, index, array) { }}
+          <option data-index="<%= element.key %>"><a>{{ element.value }}</a></option>
+        {{ }) }}
       </select>
     </div>
 
@@ -118,8 +118,8 @@
 
   <div class="mui-textfield">
 
-    <label for=""><%= question %></label>
-    <input type="text" maxlength="<%= maxLength %>"<% if(required) { %> required <% } %>  />
+    <label for="">{{ question }}</label>
+    <input type="text" maxlength="{{ maxLength }}"{{ if(required) { }} required {{ } }}  />
 
   </div>
 
@@ -137,16 +137,16 @@
 
     <div class="mui-row">
       <div class="dropdown-question-header">
-        <h4><%= question %></h4>
+        <h4>{{ question }}</h4>
       </div>
     </div>
 
     <div class="mui-row">
-      <ul class="multiple-choice-list" data-group="dropdown-group--<%= code %>">
+      <ul class="multiple-choice-list" data-group="dropdown-group--{{ code %>">
         <% answers.forEach(function(element, index, array) { %>
           <li class="mui-col-xs-12 mui-col-sm-6 mui-col-md-6 mui-col-lg-6 choice">
-            <a class="mui-btn mui-btn--primary mui-btn--flat multi-choice-answer-button pull-left" data-index="<%= element.key %>" data-checked="false">
-              <%= element.value %>
+            <a class="mui-btn mui-btn--primary mui-btn--flat multi-choice-answer-button pull-left" data-index="{{ element.key %>" data-checked="false">
+              {{ element.value }}
             </a>
           </li>
         <% }); %>
@@ -163,21 +163,21 @@
 
     <div class="mui-row">
       <div class="dropdown-question-header">
-        <h4><%= question %></h4>
+        <h4>{{ question }}</h4>
       </div>
     </div>
 
     <div class="mui-row">
-      <ul class="form-inputs-list" data-group="dropdown-group--<%= code %>">
-        <% fields.forEach(function(element, index, array) { %>
+      <ul class="form-inputs-list" data-group="dropdown-group--{{ code }}">
+        {{ fields.forEach(function(element, index, array) { }}
 
-          <% if(element.answer !== '') { %>
-          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="<%= element.key %>" data-writable="false">
+          {{ if(element.answer !== '') { %>
+          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{ element.key }}" data-writable="false">
             <span>element.label</span><span>element.answer</span>
           </li>
-          <% } else { %>
-          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="<%= element.key %>" data-writable="true">
-            <% if(element.key === 'gender') { %>
+          {{ } else { }}
+          <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{ element.key }}" data-writable="true">
+            <% if(element.key === 'gender') { }}
 
               <ul class="radio">
                 <li data-writable="false"><input type="radio" name="gender" id="male" value="male" /><label for="male">Male</label></label></li>
@@ -185,26 +185,26 @@
                 <li data-writable="false"><input type="radio" name="gender" id="other" value="other" /><label for="other">Other</label></li>
               </ul>
 
-            <% } else if(element.key === 'birth_date') { %>
+            {{ } else if(element.key === 'birth_date') { }}
 
               <div class="mui-textfield">
-                <label><%= element.label %></label>
+                <label>{{ element.label }}</label>
                 <input class="dob--month-input" placeholder="MM" type="number" min="1" max="12"/> /
                 <input class="dob--day-input" placeholder="DD" type="number" min="1" max="31"/> /
                 <input class="dob--year-input" placeholder="YYYY" type="number" min="1900" max="2017"/>
               </div>
 
-            <% } else { %>
+            {{ } else { }}
 
               <div class="mui-textfield">
-                <label for=""><%= element.label %></label>
+                <label for="">{{ element.label }}</label>
                 <input type="text" maxlength="50"/>
               </div>
 
-            <% } %>
+            {{ } }}
           </li>
-          <% } %>
-        <% }); %>
+          {{ } }}
+        {{ }); }}
       </ul>
     </div>
 
@@ -224,18 +224,18 @@
 
     <div class="mui-row">
       <div class="dropdown-question-header">
-        <h4><%= question %></h4>
+        <h4>{{ question }}</h4>
       </div>
     </div>
 
     <div class="c4w-btn-group c4w-btn-icon-group" role="group">
       <button type="button" class="btn btn-default" data-answer="yes">
           <i class="fa fa-check fa-2x"></i>
-          <h4><%= yesLabel %></h4>
+          <h4>{{ yesLabel }}</h4>
       </button>
       <button type="button" class="btn btn-default" data-answer="no">
           <i class="fa fa-times fa-2x" aria-hidden="true"></i>
-          <h4><%= noLabel %></h4>
+          <h4>{{ noLabel }}</h4>
       </button>
     </div>
 
