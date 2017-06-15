@@ -26,12 +26,6 @@
   * therefore normalizing the methods and attributes.
   */
 
-  _.templateSettings = {
-      evaluate: /\{\{(.+?)\}\}/g,
-      interpolate: /\{\{=(.+?)\}\}/g,
-      escape: /\{\{-(.+?)\}\}/g
-  };
-
 
  var QuestionsCollection = Backbone.Collection.extend({
    url:'/src/mock-data.json',
