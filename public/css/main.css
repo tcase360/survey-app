@@ -270,3 +270,24 @@ button {
   width: 45%;
   margin-right: 10px;
 }
+
+.form-inputs-list {
+  list-style: none;
+}
+
+.radio {
+  list-style: none;
+  min-height: 58px;
+}
+
+.radio > li {
+  display: inline-block;
+}
+
+.mui-textfield > .dob--month-input,
+.mui-textfield > .dob--day-input,
+.mui-textfield > .dob--year-input {
+  width: 27%;
+  margin: inherit 2px;
+  display: inline-block;
+}
