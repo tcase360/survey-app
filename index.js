@@ -20,7 +20,8 @@ app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
     res.render('index', {
-      base_url: process.env.MY_APPS_DEV_URL
+      my_apps_dev_url: process.env.MY_APPS_DEV_URL,
+      splash_portal_base_url: process.env.SPLASHPORTAL_BASE_URL
     });
 });
 
