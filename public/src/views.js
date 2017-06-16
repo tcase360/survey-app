@@ -243,7 +243,7 @@ var YesNoQuestionView = Backbone.View.extend({
     if(value === 'no') answer = false;
 
     model.set({
-      'answer': target,
+      'answer': answer,
       'validated': true
     });
 
@@ -281,7 +281,7 @@ var RatingQuestionView = Backbone.View.extend({
     var value = $('input[name=rate-group--' + this.model.attributes.code + ']').val();
     var model = getModelFromCollection(this.model.cid);
     model.set({
-      answer: value,
+      answer: parseInt(value),
       validated: true,
     });
 
@@ -333,10 +333,12 @@ var FormQuestionView = Backbone.View.extend({
     var validatedArray = list.filter(function(element, index, array) {
       var value = $(element).find('input').val();
       if(value.length > 0) {
-        return {
-          value: value,
-          key: $(element).data().key
-        }
+        return true;
+      }
+    }).map(function(element, index) {
+      return {
+        value: $(element).find('input').val(),
+        key: $(element).data().key,
       }
     });
 

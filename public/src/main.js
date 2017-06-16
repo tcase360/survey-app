@@ -25,12 +25,31 @@
   * new Element() constructor into the  mainArray,
   * therefore normalizing the methods and attributes.
   */
+var QuestionsCollection = Backbone.Collection.extend({
+  model: QuestionModel,
 
+  // Scrolls to next question in survey
+  nextQuestion: function(model) {
+    var currentQuestion = $('#' + model.attributes.id);
+    var nextQuestion = currentQuestion.next();
 
- var QuestionsCollection = Backbone.Collection.extend({
-   url:'/src/mock-data.json',
-   model: QuestionModel,
- });
+    var screen_height = $(window).height();
+
+    if(!!nextQuestion.length) {
+      $('html, body').animate({
+        scrollTop: (nextQuestion.offset().top - screen_height * 0.25)
+      }, 250);
+    } else {
+      $('html, body').animate({
+        scrollTop: ($('.submit-section').offset().top)
+      }, 250);
+    }
+
+    updateProgress();
+  }
+});
+
+var questionsCollection = new QuestionsCollection;
 
 function getModelFromCollection(id) {
   return questionsCollection.get(id);
@@ -67,88 +86,64 @@ function formValidityCheck() {
   }
 }
 
- var QuestionsCollection = Backbone.Collection.extend({
-   model: QuestionModel,
-
-   // Scrolls to next question in survey
-   nextQuestion: function(model) {
-     var currentQuestion = $('#' + model.attributes.id);
-     var nextQuestion = currentQuestion.next();
-
-     var screen_height = $(window).height();
-
-     if(!!nextQuestion.length) {
-       $('html, body').animate({
-         scrollTop: (nextQuestion.offset().top - screen_height * 0.25)
-       }, 250);
-     } else {
-       $('html, body').animate({
-         scrollTop: ($('.submit-section').offset().top)
-       }, 250);
-     }
-
-     updateProgress();
-   }
- });
-
- var questionsCollection = new QuestionsCollection;
 
 
+ function addQuestionsToView() {
+   questionsCollection.each(function(question) {
+     var questionView;
 
- questionsCollection.each(function(question) {
-   var questionView;
+     switch (question.attributes.type) {
+       case 'text': {
+         questionView = new TextQuestionView({
+           model:question,
+           id:question.attributes.id,
+         });
+       } break;
 
-   switch (question.attributes.type) {
-     case 'text': {
-       questionView = new TextQuestionView({
-         model:question,
-         id:question.attributes.id,
-       });
-     } break;
-
-     case 'yesNo': {
-       questionView = new YesNoQuestionView({
-         model:question,
-         id:question.attributes.id
-       });
-     } break;
-
-     case 'rating': {
-       questionView = new RatingQuestionView({
-         model:question,
-         id:question.attributes.id
-       });
-     } break;
-
-     case 'form': {
-       questionView = new FormQuestionView({
-         model:question,
-         id:question.attributes.id
-       });
-     } break;
-
-     case 'multiChoice': {
-       if(question.attributes.style === 'list') {
-         questionView = new MultiChoiceQuestionView({
-            model:question,
-            id:question.attributes.id,
-          });
-       }
-       if (question.attributes.style === 'dropdown') {
-         questionView = new SingleChoiceQuestionView({
+       case 'yesNo': {
+         questionView = new YesNoQuestionView({
            model:question,
            id:question.attributes.id
          });
-       }
-     } break;
+       } break;
 
-     default: {
-       null;
-     } break;
-   }
+       case 'rating': {
+         questionView = new RatingQuestionView({
+           model:question,
+           id:question.attributes.id
+         });
+       } break;
 
-   $("#container").append(questionView.render().$el);
- });
+       case 'form': {
+         questionView = new FormQuestionView({
+           model:question,
+           id:question.attributes.id
+         });
+       } break;
+
+       case 'multiChoice': {
+         if(question.attributes.style === 'list') {
+           questionView = new MultiChoiceQuestionView({
+              model:question,
+              id:question.attributes.id,
+            });
+         }
+         if (question.attributes.style === 'dropdown') {
+           questionView = new SingleChoiceQuestionView({
+             model:question,
+             id:question.attributes.id
+           });
+         }
+       } break;
+
+       default: {
+         null;
+       } break;
+     }
+
+     $("#container").append(questionView.render().$el);
+   });
+ }
 
 function updateProgress() {
   var length = questionsCollection.length;
@@ -170,15 +165,37 @@ function updateProgress() {
   progressCounter.text(progressCount + '/' + length);
 }
 
-function postSurveyData(data, callback) {
-  callback();
+function postSurveyData(formData, callback) {
+  $.ajax({
+    type:'POST',
+    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk() + '/' + window.SURVEY_DATA.code,
+    data: JSON.stringify(formData),
+    success: function(data) {
+      callback();
+    }
+  })
+}
+
+function enrichData(data) {
+  var enrichedData = {
+    questions: data.map(function(element, index) {
+      return {
+        code: '' + element.code,
+        type: element.type,
+        answer: element.answer,
+        question: element.question,
+      }
+    })
+  }
+  return enrichedData;
 }
 
 function submitForm(e) {
   var validity = formValidityCheck();
+  var enrichedData = enrichData(questionsCollection.toJSON());
 
   if(validity === true) {
-    postSurveyData(questionsCollection.toJSON(), function(data) {
+    postSurveyData(enrichedData, function(data) {
       $('.submit-section--body').fadeIn('fast');
     });
   } else {
@@ -204,6 +221,17 @@ function initializeSurvey(event) {
         $('.question-container').first().addClass('active');
       });
   });
+}
+
+function pageLoaded(params) {
+  $('#form-submit-button').text(params['submitBtnLabel']);
+  $('#submit-section').text(params['thanksText']);
+  $('#welcome-message--body > h3').text(params['welcomeText']);
+  $('#loading_overlay').fadeOut('fast', function() {
+    $('#welcome-section').fadeIn('slow', function() {
+      MYAPPS.renderNavbar();
+    });
+  })
 }
 
 function detectEnterKey(event) {
@@ -247,15 +275,18 @@ $(document).ready(function() {
   $.ajax({
     method: 'GET',
     url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk(),
-    type: 'json',
+    dataType: 'JSON',
     success: function(data) {
-      console.log(data);
+      pageLoaded(data);
+      window.SURVEY_DATA = data;
       var questions = data.data.questions.map(function(element, index, arr) {
         element.skipBtnLabel = data.data.skipBtnLabel;
         element.nextBtnLabel = data.data.nextBtnLabel;
         var question = new QuestionModel(element);
         questionsCollection.add(question);
       });
+
+      addQuestionsToView();
     }
   })
 
@@ -263,10 +294,6 @@ $(document).ready(function() {
  $('#initialize-survey').on('click', initializeSurvey);
  $('body').on('keydown', detectEnterKey);
  $(window).on('scroll', detectActiveDiv);
- MYAPPS.renderNavbar({
-   //options
- });
-
  var trigger = MYAPPS.getNextUrl();
 
  $('body').css('margin-top', '100px');

@@ -87,7 +87,7 @@ var RatingQuestionModel = Backbone.Model.extend({
 var FormQuestionModel = Backbone.Model.extend({
   initialize: function() {
     var array = this.attributes.attributes.fields.map(function(element, index, array) {
-      var answer = mockData.customer[element.key];
+      var answer = window.SURVEY_DATA.customer[element.key];
       return {
         key: element.key,
         label: element.value,
