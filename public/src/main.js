@@ -168,7 +168,7 @@ function updateProgress() {
 function postSurveyData(formData, callback) {
   $.ajax({
     type:'POST',
-    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk() + '/' + window.SURVEY_DATA.code,
+    url: BASE_URL + '/api/v1/survey/view/' + !!MYAPPS.getSk() ? MYAPPS.getSk() : '0' + '/' + window.SURVEY_DATA.code,
     data: JSON.stringify(formData),
     success: function(data) {
       callback();
@@ -230,9 +230,7 @@ function pageLoaded(params) {
   $('#welcome-message--body > h3').text(params['welcomeText']);
   $('#loading_overlay').fadeOut('fast', function() {
     $('body').removeClass('loading');
-    $('#welcome-section').fadeIn('slow', function() {
-
-    });
+    $('#welcome-section').fadeIn('slow');
   })
 }
 
@@ -276,7 +274,11 @@ function detectActiveDiv(event) {
 $(document).ready(function() {
   $.ajax({
     method: 'GET',
-    url: BASE_URL + '/api/v1/survey/view/' + MYAPPS.getSk(),
+    // if sk is present then:
+    // /api/v1/survey/view/{sk}/0
+    // if sk is not present then:
+    // /api/v1/survey/view/0
+    url: BASE_URL + '/api/v1/survey/view/' + !!MYAPPS.getSk() ? MYAPPS.getSk() : '0' + '/' + !!MYAPPS.getParam('pc') ? MYAPPS.getParam('pc') : '0',
     dataType: 'JSON',
     success: function(data) {
       pageLoaded(data);
