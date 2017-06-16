@@ -2,10 +2,20 @@ body {
   margin-top: 100px !important;
   padding: 25px;
 }
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body.loading {
+  margin-top: 0 !important;
+}
+
+#loading_overlay {
+  background: white;
+  z-index: 1000;
 }
 
 /**

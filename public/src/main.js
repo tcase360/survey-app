@@ -224,12 +224,14 @@ function initializeSurvey(event) {
 }
 
 function pageLoaded(params) {
+  MYAPPS.renderNavbar();
   $('#form-submit-button').text(params['submitBtnLabel']);
   $('#submit-section').text(params['thanksText']);
   $('#welcome-message--body > h3').text(params['welcomeText']);
   $('#loading_overlay').fadeOut('fast', function() {
+    $('body').removeClass('loading');
     $('#welcome-section').fadeIn('slow', function() {
-      MYAPPS.renderNavbar();
+
     });
   })
 }
