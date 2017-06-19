@@ -196,13 +196,17 @@ function submitForm(e) {
 
   if(validity === true) {
     postSurveyData(enrichedData, function(data) {
-      $('.submit-section--body').fadeIn('fast');
-      if(MYAAPS.getNextUrl()) {
-        MYAPPS.goNext();
-      } else {
-        MYAPPS.goHome();
-      }
-
+      $('.submit-section--body')
+      .text(window.SURVEY_DATA.data.thanksText)
+      .fadeIn('fast', function() {
+        setTimeout(function() {
+          if(MYAAPS.getNextUrl()) {
+            MYAPPS.goNext();
+          } else {
+            MYAPPS.goHome();
+          }
+        }, 1000);
+      });
     });
   } else {
     $('html, body').animate({
@@ -233,9 +237,10 @@ function pageLoaded(params) {
   MYAPPS.renderNavbar({
     nextBtn: false
   });
-  $('#form-submit-button').text(params['submitBtnLabel']);
-  $('#submit-section').text(params['thanksText']);
-  $('#welcome-message--body > h3').text(params['welcomeText']);
+  $('#initialize-survey').text(params['data']['startBtnLabel']);
+  $('#form-submit-button').text(params['data']['submitBtnLabel']);
+  $('.submit-section--body').text(params['data']['thanksText']);
+  $('.welcome-message--body--header').text(params['data']['welcomeText']);
   $('#loading_overlay').fadeOut('fast', function() {
     $('body').removeClass('loading');
     $('#welcome-section').fadeIn('slow');

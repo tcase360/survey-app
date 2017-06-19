@@ -18,7 +18,7 @@
 
 <div class="welcome-message" id="welcome-section" style="display:none;">
   <div class="welcome-message--body">
-    <h3>
+    <h3 class="welcome-message--body--header">
       Hello and welcome! Please take this Survey. Click the button or press Enter.
     </h3>
   </div>
@@ -175,7 +175,7 @@
           {{ if(element.answer) { }}
           <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{= element.key }}" data-writable="false">
             <span>{{= element.label }}</span>
-            <br/>            
+            <br/>
             <span>{{= element.answer }}</span>
           </li>
           {{ } else { }}
@@ -201,7 +201,7 @@
 
               <div class="mui-textfield">
                 <label for="">{{= element.label }}</label>
-                <input type="{{ if(element.key === 'email') { }}{{='email'}} {{ } else { }}'text'{{}}}" maxlength="50" required/>
+                <input type="{{if(element.key === 'email') {}}{{='email'}}{{} else {}}'text'{{}}}" maxlength="50" required/>
               </div>
 
             {{ } }}
