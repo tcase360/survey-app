@@ -272,30 +272,22 @@ var RatingQuestionView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(this);
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
 
   validateRating: function(event) {
-    console.log(this);
-    console.log(event);
     var self = this;
     var target = $(event.target);
-    var value = target.val();
-    var container = target.closest('.question-container');
-
-    var id = container.attr('id').split('--')[1];
-
-    var model = getModelFromCollection('view' + id);
-
+    var value = $('input[name=rate-group--' + this.model.attributes.code + ']').val();
+    var model = getModelFromCollection(this.model.cid);
     model.set({
-      answer: value,
+      answer: parseInt(value),
       validated: true,
     });
 
     setTimeout(function() {
-      viewNextQuestion(model);
+      viewNextQuestion(self);
     }, 200);
   },
 
