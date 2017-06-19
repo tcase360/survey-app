@@ -200,7 +200,7 @@ function submitForm(e) {
       .text(window.SURVEY_DATA.data.thanksText)
       .fadeIn('fast', function() {
         setTimeout(function() {
-          if(MYAAPS.getNextUrl()) {
+          if(MYAPPS.getNextUrl()) {
             MYAPPS.goNext();
           } else {
             MYAPPS.goHome();
