@@ -83,8 +83,8 @@
 
   <div class="rate">
     {{ for(var x = 5; x > 0; x--) { }}
-      <input type="radio" id="star-{{= x }}.{{= code }}" class="ratingInput" name="rate-group--{{= code }}" value="{{= x }}"/>
-      <label for="star-{{= x }}.{{= code }}" title="text">{{= x }} stars</label>
+      <input type="radio" id="star-{{= x }}--{{= code }}" class="ratingInput" name="rate-group--{{= code }}" value="{{= x }}"/>
+      <label for="star-{{= x }}--{{= code }}" title="text">{{= x }} stars</label>
     {{ } }}
   </div>
 
