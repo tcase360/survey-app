@@ -43,10 +43,6 @@ var TextQuestionModel = Backbone.Model.extend({
 });
 
 var SingleChoiceQuestionModel = Backbone.Model.extend({
-  initialize: function() {
-
-  },
-
   defaults: {
     answer: null,
     validated: false,
@@ -55,10 +51,6 @@ var SingleChoiceQuestionModel = Backbone.Model.extend({
 
 
 var MultiChoiceQuestionModel = Backbone.Model.extend({
-  initialize: function() {
-
-  },
-
   defaults: {
     answer: null,
     validated: false,
@@ -73,10 +65,6 @@ var YesNoQuestionModel = Backbone.Model.extend({
 });
 
 var RatingQuestionModel = Backbone.Model.extend({
-  initialize: function() {
-
-  },
-
   defaults: {
     type: 'rating',
     answer: null,

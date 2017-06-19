@@ -278,6 +278,8 @@ var RatingQuestionView = Backbone.View.extend({
 
   validateRating: function(event) {
     var self = this;
+    var target = $(event.target);
+    console.log(target.val());
     var value = $('input[name=rate-group--' + this.model.attributes.code + ']').val();
     var model = getModelFromCollection(this.model.cid);
     model.set({
@@ -308,6 +310,7 @@ var FormQuestionView = Backbone.View.extend({
   },
 
   render: function() {
+    console.log(this.model.toJSON());
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
