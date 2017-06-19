@@ -272,11 +272,14 @@ var RatingQuestionView = Backbone.View.extend({
   },
 
   render: function() {
+    console.log(this);
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
 
   validateRating: function(event) {
+    console.log(this);
+    console.log(event);
     var self = this;
     var target = $(event.target);
     var value = target.val();
@@ -284,7 +287,7 @@ var RatingQuestionView = Backbone.View.extend({
 
     var id = container.attr('id').split('--')[1];
 
-    var model = getModelFromCollection(id);
+    var model = getModelFromCollection('view' + id);
 
     model.set({
       answer: value,
@@ -292,7 +295,7 @@ var RatingQuestionView = Backbone.View.extend({
     });
 
     setTimeout(function() {
-      viewNextQuestion(self);
+      viewNextQuestion(model);
     }, 200);
   },
 
