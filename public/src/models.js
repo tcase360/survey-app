@@ -102,6 +102,6 @@ var FormQuestionModel = Backbone.Model.extend({
 
   defaults: {
     validated: false,
-    answers: false
+    answers: false,
   }
 });

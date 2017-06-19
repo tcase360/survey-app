@@ -172,7 +172,7 @@
       <ul class="form-inputs-list" data-group="dropdown-group--{{= code }}">
         {{ fields.forEach(function(element, index, array) { }}
 
-          {{ if(element.answer !== '') { }}
+          {{ if(element.answer) { }}
           <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{= element.key }}" data-writable="false">
             <span>element.label</span><span>element.answer</span>
           </li>
