@@ -293,8 +293,10 @@ $(document).ready(function() {
       window.SURVEY_DATA = data;
       if(!data.success && MYAPPS.getNextUrl()) {
         MYAPPS.goNext();
+        return;
       } else if(!data.success) {
         MYAPPS.goHome();
+        return;
       }
       var questions = data.data.questions.map(function(element, index, arr) {
         element.skipBtnLabel = data.data.skipBtnLabel;
