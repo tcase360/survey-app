@@ -197,6 +197,12 @@ function submitForm(e) {
   if(validity === true) {
     postSurveyData(enrichedData, function(data) {
       $('.submit-section--body').fadeIn('fast');
+      if(MYAAPS.getNextUrl()) {
+        MYAPPS.goNext();
+      } else {
+        MYAPPS.goHome();
+      }
+
     });
   } else {
     $('html, body').animate({
@@ -224,7 +230,9 @@ function initializeSurvey(event) {
 }
 
 function pageLoaded(params) {
-  MYAPPS.renderNavbar();
+  MYAPPS.renderNavbar({
+    nextBtn: false
+  });
   $('#form-submit-button').text(params['submitBtnLabel']);
   $('#submit-section').text(params['thanksText']);
   $('#welcome-message--body > h3').text(params['welcomeText']);
@@ -283,6 +291,11 @@ $(document).ready(function() {
     success: function(data) {
       pageLoaded(data);
       window.SURVEY_DATA = data;
+      if(!data.success && MYAPPS.getNextUrl()) {
+        MYAPPS.goNext();
+      } else if(!data.success) {
+        MYAPPS.goHome();
+      }
       var questions = data.data.questions.map(function(element, index, arr) {
         element.skipBtnLabel = data.data.skipBtnLabel;
         element.nextBtnLabel = data.data.nextBtnLabel;
