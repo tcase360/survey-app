@@ -279,11 +279,15 @@ var RatingQuestionView = Backbone.View.extend({
   validateRating: function(event) {
     var self = this;
     var target = $(event.target);
-    console.log(target.val());
-    var value = $('input[name=rate-group--' + this.model.attributes.code + ']').val();
-    var model = getModelFromCollection(this.model.cid);
+    var value = target.val();
+    var container = target.closest('.question-container');
+
+    var id = container.attr('id').split('--')[1];
+
+    var model = getModelFromCollection(id);
+
     model.set({
-      answer: parseInt(value),
+      answer: value,
       validated: true,
     });
 
