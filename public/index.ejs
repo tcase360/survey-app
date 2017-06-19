@@ -174,32 +174,34 @@
 
           {{ if(element.answer) { }}
           <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{= element.key }}" data-writable="false">
-            <span>element.label</span><span>element.answer</span>
+            <span>{{= element.label }}</span>
+            <br/>            
+            <span>{{= element.answer }}</span>
           </li>
           {{ } else { }}
           <li class="form-input mui-col-md-6 mui-col-lg-6 mui-col-sm-12 mui-col-xs-12" data-key="{{= element.key }}" data-writable="true">
             {{ if(element.key === 'gender') { }}
 
               <ul class="radio">
-                <li data-writable="false"><input type="radio" name="gender" id="male" value="male" /><label for="male">Male</label></label></li>
-                <li data-writable="false"><input type="radio" name="gender" id="female" value="female" /><label for="female">Female</label></li>
-                <li data-writable="false"><input type="radio" name="gender" id="other" value="other" /><label for="other">Other</label></li>
+                <li data-writable="false"><input type="radio" required name="gender" id="male" value="male" /><label for="male">Male</label></label></li>
+                <li data-writable="false"><input type="radio" required name="gender" id="female" value="female" /><label for="female">Female</label></li>
+                <li data-writable="false"><input type="radio" required name="gender" id="other" value="other" /><label for="other">Other</label></li>
               </ul>
 
             {{ } else if(element.key === 'birth_date') { }}
 
               <div class="mui-textfield">
                 <label>{{= element.label }}</label>
-                <input class="dob--month-input" placeholder="MM" type="number" min="1" max="12"/> /
-                <input class="dob--day-input" placeholder="DD" type="number" min="1" max="31"/> /
-                <input class="dob--year-input" placeholder="YYYY" type="number" min="1900" max="2017"/>
+                <input class="dob--month-input" placeholder="MM" type="number" min="1" max="12" required/> /
+                <input class="dob--day-input" placeholder="DD" type="number" min="1" max="31" required/> /
+                <input class="dob--year-input" placeholder="YYYY" type="number" min="1900" max="2017" required/>
               </div>
 
             {{ } else { }}
 
               <div class="mui-textfield">
                 <label for="">{{= element.label }}</label>
-                <input type="text" maxlength="50"/>
+                <input type="{{ if(element.key === 'email') { }}{{='email'}} {{ } else { }}'text'{{}}}" maxlength="50" required/>
               </div>
 
             {{ } }}

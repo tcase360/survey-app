@@ -402,7 +402,7 @@ var FormQuestionView = Backbone.View.extend({
       var date;
 
       if((!!monthInput || !!dayInput || !!yearInput) &&
-          ((1 <= monthInput <= 12) && (1 <= dayInput <= 31) && (1900 <= yearInput <= 2017 ))) {
+        ((1 <= monthInput <= 12) && (1 <= dayInput <= 31) && (1900 <= yearInput <= 2017 ))) {
         return {
           value: monthInput + '/' + dayInput + '/' + yearInput,
           validated: true
