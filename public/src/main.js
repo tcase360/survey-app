@@ -87,63 +87,62 @@ function formValidityCheck() {
 }
 
 
+function addQuestionsToView() {
+ questionsCollection.each(function(question) {
+   var questionView;
 
- function addQuestionsToView() {
-   questionsCollection.each(function(question) {
-     var questionView;
+   switch (question.attributes.type) {
+     case 'text': {
+       questionView = new TextQuestionView({
+         model:question,
+         id:question.attributes.id,
+       });
+     } break;
 
-     switch (question.attributes.type) {
-       case 'text': {
-         questionView = new TextQuestionView({
-           model:question,
-           id:question.attributes.id,
-         });
-       } break;
+     case 'yesNo': {
+       questionView = new YesNoQuestionView({
+         model:question,
+         id:question.attributes.id
+       });
+     } break;
 
-       case 'yesNo': {
-         questionView = new YesNoQuestionView({
+     case 'rating': {
+       questionView = new RatingQuestionView({
+         model:question,
+         id:question.attributes.id
+       });
+     } break;
+
+     case 'form': {
+       questionView = new FormQuestionView({
+         model:question,
+         id:question.attributes.id
+       });
+     } break;
+
+     case 'multiChoice': {
+       if(question.attributes.style === 'list') {
+         questionView = new MultiChoiceQuestionView({
+            model:question,
+            id:question.attributes.id,
+          });
+       }
+       if (question.attributes.style === 'dropdown') {
+         questionView = new SingleChoiceQuestionView({
            model:question,
            id:question.attributes.id
          });
-       } break;
+       }
+     } break;
 
-       case 'rating': {
-         questionView = new RatingQuestionView({
-           model:question,
-           id:question.attributes.id
-         });
-       } break;
+     default: {
+       null;
+     } break;
+   }
 
-       case 'form': {
-         questionView = new FormQuestionView({
-           model:question,
-           id:question.attributes.id
-         });
-       } break;
-
-       case 'multiChoice': {
-         if(question.attributes.style === 'list') {
-           questionView = new MultiChoiceQuestionView({
-              model:question,
-              id:question.attributes.id,
-            });
-         }
-         if (question.attributes.style === 'dropdown') {
-           questionView = new SingleChoiceQuestionView({
-             model:question,
-             id:question.attributes.id
-           });
-         }
-       } break;
-
-       default: {
-         null;
-       } break;
-     }
-
-     $("#container").append(questionView.render().$el);
-   });
- }
+   $("#container").append(questionView.render().$el);
+ });
+}
 
 function updateProgress() {
   var length = questionsCollection.length;

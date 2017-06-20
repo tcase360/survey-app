@@ -252,7 +252,6 @@ var YesNoQuestionView = Backbone.View.extend({
     }, 500);
   }
 
-
 });
 
 var RatingQuestionView = Backbone.View.extend({
